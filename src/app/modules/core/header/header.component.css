@@ -1,0 +1,95 @@
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the list items and links */
+.navbar li {
+  display: inline; /* Display list items horizontally */
+  margin-right: 20px; /* Add spacing between list items */
+}
+
+.navbar a {
+  text-decoration: none; /* Remove underlines from links */
+  color: #333; /* Set link color */
+  font-weight: bold; /* Make text bold */
+}
+
+.navbar a:hover {
+  color: #509e2f;
+}
+
+.menu-toggler {
+  margin-right: 2px;
+}
+
+.logo {
+  font-weight: 600;
+  font-style: inherit;
+  color: black;
+  margin-right: 15px;
+  align-items: center;
+  vertical-align: middle;
+  position: relative;
+}
+
+.logo-text {
+  color: #509e2f;
+  font-family: Arial;
+  font-weight: 600;
+}
+
+/* Style the navbar background */
+.navbar {
+  background-color: #fff; /* Set background color to white */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  position: sticky; /* Make the navbar sticky */
+  top: 0; /* Stick to the top of the viewport */
+  z-index: 100; /* Ensure it appears above other content */
+  transition: background-color 0.3s ease; /* Add a smooth background color transition */
+}
+
+/* Style the navbar when it becomes sticky */
+.navbar.sticky {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Slightly transparent white background */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* A more prominent shadow when sticky */
+}
+
+/* Center the search input and right-align the links */
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 8px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+}
+
+.search input {
+  padding: 7.5px 10px;
+  border: 1px solid #ccc;
+  width: 497px;
+  background-color: #f3f3f3;
+  color: grey;
+}
+
+.search button {
+  background-color: #509e2f;
+  color: #fff;
+  padding: 7.5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-links {
+  text-align: right;
+}

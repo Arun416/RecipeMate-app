@@ -1,4 +1,77 @@
-<div class="container">
+<div class="container-fluid main">
+    <div class=" d-flex flex-column justify-content-center align-items-center p-5">
+        
+        <div>
+            <!-- img class="img-banner img-fluid rounded-3" 
+            src="./assets/images/pizza-home.jpg" alt="..."/> -->
+            <carousel [isAnimated]="true">
+            <slide>
+                <img class="img-banner"  src="./assets/images/pizza-home.jpg" alt="first slide" style="display: block;" width="1120px"  height="355px">
+                <div class="carousel-caption d-none d-md-block">
+                <h3>First slide label</h3>
+                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                </div>
+            </slide>
+            <slide>
+                <img class="img-banner" src="https://www.dipitt.com/wp-content/uploads/2021/03/French-Fries-Banner.jpg"   width="1120px"  height="355px">
+                <div class="carousel-caption d-none d-md-block">
+                <h3>Second slide label</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </slide>
+          <slide>
+                <img class="img-banner" src="https://www.hungryjacks.com.au/Upload/HJ/Media/UNO/HJ00641_Penny-pinchers_WebBanner_coke_3560-x-988px_1.jpg" alt="third slide" style="display: block;" width="1120px"  height="355px">
+                <div class="carousel-caption d-none d-md-block">
+                <h3>Third slide label</h3>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                </div>
+            </slide> 
+            </carousel>
+        </div>
+        <div class="mt-4 d-sm-flex flex-wrap  justify-content-center align-items-center p-2 gap-1">
+            <button class="categories--link rounded-3 p-2 bd-highlight" style="background-color:#f6784c;color:#ffffff;">Recipes & Menus 
+                <span class="material-symbols-outlined" style="vertical-align:middle;text-align:center;margin-bottom:1px">
+                chevron_right
+                </span></button>
+            <button class="categories--link rounded-3 p-2 bd-highlight" style="background-color:#C4D600;color:#ffffff">Share your Recipe
+                <span class="material-symbols-outlined" style="vertical-align:middle;text-align:center;margin-bottom:1px">
+                    chevron_right
+                    </span>
+            </button>
+            <button class="categories--link rounded-3 p-2 bd-highlight" style="background-color:#EAAA00;color:#ffffff">Custom meal plan
+                <span class="material-symbols-outlined" style="vertical-align:middle;text-align:center;margin-bottom:1px">
+                    chevron_right
+                    </span>
+            </button>
+            <button class="categories--link rounded-3 p-2 bd-highlight" style="background-color:#ED8B00;color:#ffffff">Create grocery list
+                <span class="material-symbols-outlined" style="vertical-align:middle;text-align:center;margin-bottom:1px">
+                    chevron_right
+                    </span>
+            </button>
+            <button class="categories--link rounded-3 p-2 bd-highlight" style="background-color:#84BD00;color:#ffffff">Cook Tips Tricks
+              <span class="material-symbols-outlined" style="vertical-align:middle;text-align:center;margin-bottom:1px">
+                chevron_right
+                </span>
+            </button> 
+        </div>
+        <div class="mt-4 d-flex flex-wrap bd-highlight justify-content-center align-items-center">
+            <div class="recipe--lists bd-highlight"  *ngFor="let recipe of recipes">
+                <div class="card" style="width: 17rem;" routerLink="view-recipes">
+                    <img [src]="recipe.image" class="card-img-top" alt="..." width="300px" height="200px">
+                    <div class="card-body">
+                    <h5 class="card-title fw-8">{{recipe.name}}</h5>
+                      <p class="card-text">{{recipe.prepare_time}}</p>
+                    </div>
+                  </div>
+            </div>
+    
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="container">
     <div class="row  main">
         <div class="col-md-12 col-lg-12">
            <div class="image-layout"> 
@@ -17,7 +90,7 @@
         </div>
 
         <div class="col-md-12 col-lg-12 mt-4">
-            <div class="recipe--cards flex-wrap">
+            <div class="recipe--cards d-flex flex-wrap align-content-center  mb-3">
                 <div class="card" style="width: 18rem;" *ngFor="let recipe of recipes">
                     <img src="http://via.placeholder.com/340x160" class="card-img-top" alt="...">
                     <div class="card-body">
@@ -28,7 +101,7 @@
         </div>
     </div>
 </div>
-
+ -->
 
 <!-- <div class="container">
     <div class=" main row">

@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LayoutComponent } from './layout/layout.component';
 import { RouterModule, Routes } from '@angular/router';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 const routes: Routes = [
   {
@@ -24,7 +25,11 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, LayoutComponent],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    CarouselModule.forRoot(),
+  ],
   exports: [RouterModule, HeaderComponent, FooterComponent, LayoutComponent],
 })
 export class CoreModule {}

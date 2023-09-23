@@ -1,0 +1,13 @@
+.container {
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid grey;
+}
+
+.example-tab-icon {
+  margin-right: 8px;
+}
+
+.responsive-img {
+  height: 300px;
+}

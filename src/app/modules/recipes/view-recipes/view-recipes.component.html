@@ -1,77 +1,69 @@
+<!-- </style>
 <div class="container">
     <div class="d-flex flex-column justify-content-center align-items-center">
-        <div>
-          <img src="assets/images/burg.jfif" class="img-fluid rounded-start" alt="..." width="400px" height="400px">
+        <div style="position: relative;top:10%">
+          <img src="assets/images/burg.jfif" class="img-fluid rounded-4 recipe--image" alt="..." width="400px" height="400px">
         </div>
-        <div>
-          <mat-tab-group>
-            <mat-tab>
+        <div >
+          <mat-tab-group dynamicHeight>
+            <mat-tab >
               <ng-template mat-tab-label>
                 <mat-icon class="example-tab-icon">thumb_up</mat-icon>
-                First
+                Ingredients
               </ng-template>
-              Content 1
+              <div class="example-small-box mat-elevation-z4">
+                <mat-list>
+                  <mat-list-item>Pepper</mat-list-item>
+                  <mat-list-item>Salt</mat-list-item>
+                  <mat-list-item>Paprika</mat-list-item>
+                 </mat-list>
+              </div>
             </mat-tab>
-          
             <mat-tab>
               <ng-template mat-tab-label>
-                <mat-icon class="example-tab-icon">thumb_up</mat-icon>
-                Second
+                <mat-icon class="example-tab-icon">update</mat-icon>
+                Preparation
               </ng-template>
-              Content 2
+              <div class="example-large-box mat-elevation-z4">
+                <ol>
+                  <li>Fill the kettle with water and replace on the stand.</li>
+                  <li>Switch on the power button.</li>
+                  <li>Wait approx. 3 minutes. In the meantime, take a large mug and place the teabag in the cup.</li>
+                  <li>When the kettle has boiled, fill the mug with boiling water. <strong>Do not leave water to stand for more than one minute, or you must boil again.</strong></li>
+                  <li>Leave for 3–4 minutes, stirring occasionally.</li>
+                  <li>Remove teabag.</li>
+                  <li>Add milk according to taste.</li>
+                  <li>Serve immediately.</li>
+                </ol>
+              </div>
             </mat-tab>
-          
-            <mat-tab>
+            <mat-tab >
               <ng-template mat-tab-label>
-                <mat-icon class="example-tab-icon">thumb_up</mat-icon>
-                Third
+                <mat-icon class="example-tab-icon"> restaurant_menu</mat-icon>
+                Serves
               </ng-template>
-          
-              Content 3
+              <div class="example-small-box mat-elevation-z4">
+                <p class="text-left fs-5">Serves count is 2</p>
+              </div>
             </mat-tab>
           </mat-tab-group>
+    
         </div>
     </div>
-</div>
+</div> -->
 
-
-
-
-<!-- <div class="card mb-3 mt-5" style="max-width: 940px;">
-  <div class="d-flex flex-row justify-content-center">
-    <div>
-      <img src="assets/images/burg.jfif" class="img-fluid rounded-start" alt="..." width="400px" height="400px">
+<div class="container mt-2 pt-2">
+    <div class="d-flex justify-content-around align-items-center p-2">
+          <div class="mt-2 pt-2">
+              <img class="recipe--image"/>
+          </div>
+          <div>
+              <div class="rectangle--box">
+                <mat-action-list>  
+                  <button mat-raised-button color="primary" > Save </button>  
+                  <button mat-raised-button color="primary"> Undo </button>  
+                </mat-action-list>
+              </div>
+          </div>
     </div>
-    <div>
-      <div class="card-body">
-        <h5 class="card-title mb-4 pb-4">Card title   <span class="badge rounded-pill text-bg-primary">Primary</span></h5>
-        <tabset>
-          <tab heading="Ingredients" id="tab1">
-            <ol class="list-group list-group-numbered">
-              <li class="list-group-item">A list item</li>
-              <li class="list-group-item">A list item</li>
-              <li class="list-group-item">A list item</li>
-            </ol>
-          </tab>
-          <tab heading="Preparation Steps">
-            <ol class="list-group list-group-numbered">
-              <li class="list-group-item">Before we begin making sambar, it always helps to soak tamarind in water earlier. So soak 1 tablespoon tamarind in ⅓ cup hot
-                 water for 20 to 30 minutes.</li>
-              <li class="list-group-item">Once the tamarind gets soft, then squeeze the tamarind in the water itself. Discard the strained tamarind and keep 
-                the tamarind pulp aside.</li>
-              <li class="list-group-item">Rinse ½ cup tuvar dal (100 grams) a couple of times in fresh and clean water. You can 
-                use a strainer to rinse the lentils.</li>
-              <li class="list-group-item">Drain all the water and add the dal in a 2 litre stovetop pressure cooker. Also add ¼ teaspoon turmeric powder.</li>
-            
-            
-              <li class="list-group-item">Add 1.5 to 1.75 cups of water and mix to combine.</li>
-
-              <li class="list-group-item">Cover and pressure cook dal for 7 to 8 whistles or 9 to 10 minutes on medium heat.</li>
-              <li class="list-group-item">Drain all the water and add the dal in a 2 litre stovetop pressure cooker. Also add ¼ teaspoon turmeric powder.</li>
-
-            
-            </ol>
-          </tab>
-          <tab heading="Servings">Basic content 2</tab>
-        </tabset>
-      </div> -->
+</div>

@@ -8,7 +8,7 @@ import { EditRecipesComponent } from './edit-recipes/edit-recipes.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatListModule } from '@angular/material/list';
 const routes: Routes = [
   {
     path: '',
@@ -33,6 +33,7 @@ const routes: Routes = [
     TabsModule.forRoot(),
     MatTabsModule,
     MatIconModule,
+    MatListModule,
   ],
   exports: [
     RouterModule,
@@ -40,6 +41,7 @@ const routes: Routes = [
     ViewRecipesComponent,
     MatTabsModule,
     MatIconModule,
+    MatListModule,
   ],
 })
 export class RecipesModule {}

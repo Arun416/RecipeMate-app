@@ -1,7 +1,5 @@
-.container {
-  padding: 20px;
-  border-radius: 10px;
-  border: 2px solid grey;
+/* .container {
+  padding: 10px;
 }
 
 .example-tab-icon {
@@ -10,4 +8,60 @@
 
 .responsive-img {
   height: 300px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+ol {
+  padding: 0;
+  margin: 0;
+  max-width: 400px;
+  position: relative;
+}
+
+ol::before {
+  content: "";
+  width: 0.5rem;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 8%;
+  background: rgb(192, 169, 247);
+  z-index: -1;
+  vertical-align: middle;
+}
+
+li {
+  padding: 0.5rem 1.5rem 1rem;
+  border-radius: 1.5rem;
+  background: rgb(192, 169, 247);
+}
+
+li + li {
+  margin-top: 1rem;
+}
+
+::marker {
+  font-weight: 600;
+  color: indigo;
+  font-size: 1.8rem;
+}
+ */
+
+.recipe--image {
+  width: 706px;
+  height: 785px;
+  flex-shrink: 0;
+  border-radius: 45px;
+  background:
+    url("src/assets/images/recipe_image.png"),
+    lightgray 50% / cover no-repeat,
+    #d9d9d9;
+}
+
+.rectangle--box {
+  width: 598px;
+  height: 615px;
+  flex-shrink: 0;
+  background: #fff;
+  box-shadow: 0px 1px 21px 0px rgba(0, 0, 0, 0.2);
 }

@@ -13,7 +13,7 @@
                 </div>
             </slide>
             <slide>
-                <img class="img-banner" src="https://www.dipitt.com/wp-content/uploads/2021/03/French-Fries-Banner.jpg"   width="1120px"  height="355px">
+                <img class="img-banner" src="https://www.dipitt.com/wp-content/uploads/2021/03/French-Fries-Banner.jpg" style="display: block;"  width="1120px"  height="355px">
                 <div class="carousel-caption d-none d-md-block">
                 <h3>Second slide label</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -28,7 +28,7 @@
             </slide> 
             </carousel>
         </div>
-        <div class="mt-4 d-sm-flex  d-md-flex flex-wrap  justify-content-center align-items-center p-2 gap-1">
+       <!--  <div class="mt-4 d-sm-flex  d-md-flex flex-wrap  justify-content-center align-items-center p-2 gap-1">
             <button class="categories--link rounded-3 p-2 bd-highlight" style="background-color:#f6784c;color:#ffffff;">Recipes & Menus 
                 <span class="material-symbols-outlined" style="vertical-align:middle;text-align:center;margin-bottom:1px">
                 chevron_right
@@ -53,14 +53,19 @@
                 chevron_right
                 </span>
             </button> 
+        </div> -->
+        <div class="mt-4 pt-4 mb-4">
+            <span class="text-left fs-1 fw-7 pt-4 mt-4">Recommended Recipes</span>
         </div>
-        <div class="mt-4 d-flex flex-wrap bd-highlight justify-content-center align-items-center">
+        <div class="mt-4 pt-4 d-flex flex-wrap bd-highlight justify-content-center align-items-center">
             <div class="recipe--lists bd-highlight"  *ngFor="let recipe of recipes">
                 <div class="card" style="width: 17rem;" routerLink="view-recipes">
+                    <div class="img-hover-zoom">
                     <img [src]="recipe.image" class="card-img-top" alt="..." width="300px" height="200px">
+                    </div>
                     <div class="card-body">
                     <h5 class="card-title fw-8">{{recipe.name}}</h5>
-                      <p class="card-text">{{recipe.prepare_time}}</p>
+                      <p class="card-text" style="vertical-align:middle;align-items:center">  <mat-icon class="example-tab-icon" style="vertical-align:middle;padding-bottom:10px">update</mat-icon>{{recipe.prepare_time}}</p>
                     </div>
                   </div>
             </div>

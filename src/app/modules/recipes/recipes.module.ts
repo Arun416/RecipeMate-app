@@ -9,14 +9,30 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatButtonModule} from '@angular/material/button';
+import { MatExpansionModule} from '@angular/material/expansion';
+import { MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule} from '@angular/material/paginator';
+import { MyRecipesComponent } from './my-recipes/my-recipes.component';
+import { MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule} from '@angular/material/form-field';
+
 const routes: Routes = [
-  {
+   {
     path: '',
     component: RecipesListComponent,
-  },
+  }, 
   {
     path: 'view-recipes',
     component: ViewRecipesComponent,
+  },
+  {
+    path: 'my-recipes',
+    component: MyRecipesComponent,
+  },
+  {
+    path: 'create',
+    component: CreateRecipesComponent,
   },
 ];
 
@@ -26,6 +42,7 @@ const routes: Routes = [
     ViewRecipesComponent,
     CreateRecipesComponent,
     EditRecipesComponent,
+    MyRecipesComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +51,12 @@ const routes: Routes = [
     MatTabsModule,
     MatIconModule,
     MatListModule,
+    MatButtonModule,
+    MatExpansionModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     RouterModule,
@@ -42,6 +65,11 @@ const routes: Routes = [
     MatTabsModule,
     MatIconModule,
     MatListModule,
+    MatButtonModule,
+    MatExpansionModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
 })
+
 export class RecipesModule {}

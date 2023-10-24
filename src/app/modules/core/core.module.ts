@@ -5,22 +5,32 @@ import { FooterComponent } from './footer/footer.component';
 import { LayoutComponent } from './layout/layout.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatSidenavModule} from '@angular/material/sidenav';
+import { MatListModule} from '@angular/material/list';
+import { MatDividerModule} from '@angular/material/divider';
+import { AuthGuard } from '../auth/services/auth.guard';
 const routes: Routes = [
   {
-    path: '',
+    path: '',redirectTo:'home',pathMatch:"full",
+  },
+  {
+    path: 'home',
     component: HeaderComponent,
     outlet: 'header',
+    // canActivate: [AuthGuard]
   },
   {
-    path: '',
+    path: 'home',
     component: FooterComponent,
     outlet: 'footer',
+    // canActivate: [AuthGuard]
   },
   {
-    path: '',
+    path: 'home',
     component: LayoutComponent,
+    // canActivate: [AuthGuard]
   },
 ];
 
@@ -31,6 +41,10 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CarouselModule.forRoot(),
     MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatDividerModule
   ],
   exports: [RouterModule, HeaderComponent, FooterComponent, LayoutComponent],
 })

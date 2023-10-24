@@ -1,5 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CarouselConfig } from 'ngx-bootstrap/carousel';
+import { DrawerService } from '../services/drawer.service';
+import { MatDrawer } from '@angular/material/sidenav';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { AuthService } from '../../auth/services/auth.service';
+import { RecipeService } from '../../recipes/services/recipe.service';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-layout',
@@ -12,7 +19,7 @@ import { CarouselConfig } from 'ngx-bootstrap/carousel';
     },
   ],
 })
-export class LayoutComponent {
+export class LayoutComponent  implements OnInit{
   recipes = [
     {
       category: 'Lunch recipe',
@@ -71,4 +78,64 @@ export class LayoutComponent {
       prepare_time: '15mins',
     },
   ];
+
+  currentUserName:any;
+
+  @ViewChild('drawer') drawer!: MatDrawer;
+  constructor(private drawerService: DrawerService,
+    private breakpointObserver: BreakpointObserver,
+    private authService:AuthService,
+    private recipeService:RecipeService,
+    private router:Router,
+    private spinner: NgxSpinnerService) {
+  
+  }
+
+  isDrawerOpen$ = this.drawerService.getDrawerState();
+
+  // You can optionally subscribe to the drawer state and control it manually.
+  ngOnInit() {
+    this.isDrawerOpen$.subscribe((isOpen) => {
+      if (isOpen) {
+        this.drawer.open();
+      } else {
+        this.drawer.close();
+      }
+    });
+
+    this.getUsersRecipes();
+  }
+
+  isUserAuth(){
+    return localStorage.getItem('auth')
+  }
+
+  getUsername(){
+    if(this.isUserAuth()){
+      this.currentUserName = JSON.parse(localStorage.getItem('currentUser')|| '')
+      return this.currentUserName;
+    }
+  }
+
+  getRecipesCollection:any;
+  getUsersRecipes(){
+    this.spinner.show();
+    this.recipeService.getRecipes().subscribe((res:any)=>{
+      console.log(res)
+      this.getRecipesCollection = res.data;
+      setTimeout(() => {
+        this.spinner.hide();
+      }, 500);
+    })
+  }
+
+  onSelectRecipe(){
+    if(this.isUserAuth()){
+    this.router.navigate(['/view-recipes']);
+    }
+    else{
+      this.router.navigate(['/login']);
+    }
+  }
+
 }

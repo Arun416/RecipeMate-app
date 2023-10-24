@@ -46,16 +46,30 @@ li + li {
   font-size: 1.8rem;
 }
  */
+.view--recipe--page {
+  width: 1440px;
+  height: 1024px;
+}
 
 .recipe--image {
-  width: 706px;
-  height: 785px;
+  width: 506px;
+  height: 600px;
   flex-shrink: 0;
   border-radius: 45px;
-  background:
-    url("src/assets/images/recipe_image.png"),
-    lightgray 50% / cover no-repeat,
-    #d9d9d9;
+  background-image: url("src/assets/images/recipe_image.png");
+
+  /* Background Color */
+  background-color: lightgray;
+  
+  /* Background Position and Size */
+  background-position: 50%;
+  background-size: cover;
+  
+  /* Background Repeat */
+  background-repeat: no-repeat;
+  
+  /* Additional Background Color */
+  background-color: #d9d9d9;
 }
 
 .rectangle--box {
@@ -64,4 +78,49 @@ li + li {
   flex-shrink: 0;
   background: #fff;
   box-shadow: 0px 1px 21px 0px rgba(0, 0, 0, 0.2);
+  top:-10px;
+  padding: 30px;
+}
+
+.recipe--data {
+  background: red;
+  width: 150px;
+  display: flex;
+  align-items: center;
+}
+
+/* ::ng-deep .mat-mdc-tab .mdc-tab__text-label {
+  color: white;
+} */
+
+::ng-deep .mat-mdc-tab {
+  background: var(--grey-lighten-4, #F5F5F5);
+  color:black;
+  border-radius: 5px;
+  user-select: none; /* Standard syntax */
+}
+
+::ng-deep .mdc-tab--active {
+  color:white;
+  background-color: #509e2f;
+}
+
+::ng-deep .mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label, .mat-mdc-tab-link:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label
+{
+  color: white;
+}
+
+.ingredients--text {
+  padding-top: 20px;
+  color: #000;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 200% */
+  letter-spacing: 0.5px
+}
+
+.cooking--steps {
+  padding-top: 50px;
 }

@@ -1,0 +1,63 @@
+.login--page--backgroud {
+    background-image: url('/src/assets/images/recipe_image.png');;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.Login--page--container {
+    max-width: 600px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-bottom: 20px;
+}
+
+.login--page--group {
+    align-content: center;
+    margin-left: 230px;
+}
+
+.example-full-width {
+    width: 100%;
+  }
+
+  img {
+    display: block;
+  }
+
+  .image_wrapper {
+    position: relative;
+  }
+
+  .overlay {
+    position: absolute; 
+    background: rgba(57, 57, 57, 0.4);
+    
+    /* center overlay text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .overlay_2 {
+    /*   top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0; */
+      inset: 0;
+    }
+
+  ::ng-deep mat-checkbox {
+
+    left:-10px;
+  }
+
+
+  .login--button {
+    width:100%;
+    position: relative;
+    background: #509e2f;
+    color: white;
+    display: block;
+  }

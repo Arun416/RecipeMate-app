@@ -1,19 +1,23 @@
+
+
+  
 <div class="container-fluid main">
+
     <div class=" d-flex flex-column justify-content-center align-items-center p-5">
-        
+       
         <div>
             <!-- img class="img-banner img-fluid rounded-3" 
             src="./assets/images/pizza-home.jpg" alt="..."/> -->
             <carousel [isAnimated]="true">
             <slide>
-                <img class="img-banner"  src="./assets/images/pizza-home.jpg" alt="first slide" style="display: block;" width="1120px"  height="355px">
+                <img class="img-banner"  src="https://www.eatingwell.com/thmb/eJhOXcO3mq2u78h81FWkd5Eq_l0=/2000x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/banner-sheet-pan-salmon-05a00be168794157a58f7c741831afde.jpg" alt="first slide" style="display: block;" width="1120px"  height="355px">
                 <div class="carousel-caption d-none d-md-block">
                 <h3>First slide label</h3>
                 <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                 </div>
             </slide>
             <slide>
-                <img class="img-banner" src="https://www.dipitt.com/wp-content/uploads/2021/03/French-Fries-Banner.jpg" style="display: block;"  width="1120px"  height="355px">
+                <img class="img-banner" src="https://www.readyseteat.com/sites/g/files/qyyrlu501/files/images/article/hero/article_mothersday-desserts-header_3780x1144.jpg" style="display: block;"  width="1120px"  height="355px">
                 <div class="carousel-caption d-none d-md-block">
                 <h3>Second slide label</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -28,48 +32,28 @@
             </slide> 
             </carousel>
         </div>
-       <!--  <div class="mt-4 d-sm-flex  d-md-flex flex-wrap  justify-content-center align-items-center p-2 gap-1">
-            <button class="categories--link rounded-3 p-2 bd-highlight" style="background-color:#f6784c;color:#ffffff;">Recipes & Menus 
-                <span class="material-symbols-outlined" style="vertical-align:middle;text-align:center;margin-bottom:1px">
-                chevron_right
-                </span></button>
-            <button class="categories--link rounded-3 p-2 bd-highlight" style="background-color:#C4D600;color:#ffffff">Share your Recipe
-                <span class="material-symbols-outlined" style="vertical-align:middle;text-align:center;margin-bottom:1px">
-                    chevron_right
-                    </span>
-            </button>
-            <button class="categories--link rounded-3 p-2 bd-highlight" style="background-color:#EAAA00;color:#ffffff">Custom meal plan
-                <span class="material-symbols-outlined" style="vertical-align:middle;text-align:center;margin-bottom:1px">
-                    chevron_right
-                    </span>
-            </button>
-            <button class="categories--link rounded-3 p-2 bd-highlight" style="background-color:#ED8B00;color:#ffffff">Create grocery list
-                <span class="material-symbols-outlined" style="vertical-align:middle;text-align:center;margin-bottom:1px">
-                    chevron_right
-                    </span>
-            </button>
-            <button class="categories--link rounded-3 p-2 bd-highlight" style="background-color:#84BD00;color:#ffffff">Cook Tips Tricks
-              <span class="material-symbols-outlined" style="vertical-align:middle;text-align:center;margin-bottom:1px">
-                chevron_right
-                </span>
-            </button> 
-        </div> -->
         <div class="mt-4 pt-4 mb-4">
-            <span class="text-left fs-1 fw-7 pt-4 mt-4">Recommended Recipes</span>
+            <span class="text-left fs-1 fw-7 pt-4 mt-4">All Recipes</span>
         </div>
         <div class="mt-4 pt-4 d-flex flex-wrap bd-highlight justify-content-center align-items-center">
-            <div class="recipe--lists bd-highlight"  *ngFor="let recipe of recipes">
-                <div class="card" style="width: 17rem;" routerLink="view-recipes">
+            <div class="recipe--lists bd-highlight"  *ngFor="let recipe of getRecipesCollection">
+                <div class="card" style="width: 17rem;" (click)="onSelectRecipe()">
+                    <div class="card-header bg-transparent">  
+                        <div class="card-header bg-transparent  d-inline-flex p-0">  
+                        <div><img src="https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg" class="avatar" alt="Avatar" /></div>
+                        <div style="padding-left: 6px;vertical-align: middle;padding-top:4px;">{{recipe.username}}</div>
+                        </div>
+                    </div>
                     <div class="img-hover-zoom">
-                    <img [src]="recipe.image" class="card-img-top" alt="..." width="300px" height="200px">
+                    <img [src]="recipe.recipe_image" class="card-img-top" alt="..." width="300px" height="200px">
                     </div>
                     <div class="card-body">
-                    <h5 class="card-title fw-8">{{recipe.name}}</h5>
+                    <h5 class="card-title fw-8">{{recipe.recipe_name}}</h5>
                       <p class="card-text" style="vertical-align:middle;align-items:center">  <mat-icon class="example-tab-icon" style="vertical-align:middle;padding-bottom:10px">update</mat-icon>{{recipe.prepare_time}}</p>
+                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                     </div>
                   </div>
             </div>
-    
         </div>
     </div>
 </div>
@@ -127,3 +111,4 @@
     </div>
 </div>
  -->
+ 

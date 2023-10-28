@@ -1,6 +1,9 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { RecipeService } from '../services/recipe.service';
+import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export interface PeriodicElement {
   Name: string;
@@ -25,11 +28,31 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './view-recipes.component.html',
   styleUrls: ['./view-recipes.component.css']
 })
-export class ViewRecipesComponent implements AfterViewInit {
+export class ViewRecipesComponent implements OnInit,AfterViewInit {
   displayedColumns: string[] = ['id', 'Name', 'Quantity'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-
+  dataSource: any;
+  recipeInfo:any;
+  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(private recipeService:RecipeService,private route:ActivatedRoute, 
+    private spinner: NgxSpinnerService,){
+      
+  }
+
+ 
+  ngOnInit():void{
+    this.spinner.show();
+    const Id = this.route.snapshot.paramMap.get('id');
+    this.recipeService.viewRecipe(Id).subscribe((res:any)=>{
+      console.log(res);
+      this.recipeInfo = res.data
+      this.dataSource = this.recipeInfo.ingredients;
+      setTimeout(() => {
+        this.spinner.hide();
+      }, 100);
+    })
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

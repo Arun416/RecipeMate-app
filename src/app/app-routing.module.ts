@@ -3,19 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () =>
-      import('./modules/core/core.module').then((m) => m.CoreModule),
+    path: 'home',
+    loadChildren: () => import('./modules/core/core.module').then((m) => m.CoreModule),
+  },
+  {
+    path: '', redirectTo: 'home', pathMatch: 'full'
   },
   {
     path: 'login',
-    loadChildren: () =>
-      import('./modules/auth/auth.module').then((m) => m.AuthModule),
+    loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'view-recipes',
-    loadChildren: () =>
-      import('./modules/recipes/recipes.module').then((m) => m.RecipesModule),
+    loadChildren: () => import('./modules/recipes/recipes.module').then((m) => m.RecipesModule),
   },
 ];
 

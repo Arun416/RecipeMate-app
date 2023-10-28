@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg w-100">
     <div class="container d-flex justify-content-between align-items-center">
-      <button *ngIf="isAuthenticated()" mat-icon-button (click)="toggleDrawer()"><span class="material-icons" style="cursor: pointer;;vertical-align: middle;padding-right: 6px;">menu</span></button>
+      <button class="toggleMenu--Drawer" *ngIf="isAuthenticated()" mat-icon-button (click)="toggleDrawer()"><span class="material-icons" style="cursor: pointer;;vertical-align: middle;padding-right: 6px;">menu</span></button>
       <a class="navbar-brand logo" href="#"><span class="logo-text">Recipe</span> Mate</a>
       <div class=" search d-lg-block  d-none" >
         <input type="text" placeholder="Search for Recipes">

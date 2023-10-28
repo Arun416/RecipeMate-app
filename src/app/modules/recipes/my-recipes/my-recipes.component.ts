@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../services/recipe.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-recipes',
@@ -9,7 +10,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class MyRecipesComponent implements OnInit{
 savedRecipes:any;
-constructor(private recipeService:RecipeService, private spinner: NgxSpinnerService,){}
+constructor(private recipeService:RecipeService, 
+  private spinner: NgxSpinnerService,
+  private router:Router,){}
 
 ngOnInit():void{
   this.getMyRecipes()
@@ -26,8 +29,12 @@ getMyRecipes(){
     this.savedRecipes = res.data;
     setTimeout(() => {
       this.spinner.hide();
-    }, 500);
+    }, 100);
   })
+}
+
+onSelectRecipe(recipeId:any){
+  this.router.navigate(['/view-recipes/'+recipeId]);
 }
 
 }

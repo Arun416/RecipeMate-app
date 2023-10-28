@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -16,14 +16,20 @@ import { MatPaginatorModule} from '@angular/material/paginator';
 import { MyRecipesComponent } from './my-recipes/my-recipes.component';
 import { MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatCardModule} from '@angular/material/card';
+import { MatSelectModule} from '@angular/material/select';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { MatTooltipModule} from '@angular/material/tooltip';
+import { MatDividerModule} from '@angular/material/divider';
 
 const routes: Routes = [
-   {
-    path: '',
-    component: RecipesListComponent,
-  }, 
   {
-    path: 'view-recipes',
+    path:'',
+    redirectTo:'view-recipes/:id',
+    pathMatch:'full'
+  },
+  {
+    path: 'view-recipes/:id',
     component: ViewRecipesComponent,
   },
   {
@@ -56,7 +62,13 @@ const routes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatCardModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatTooltipModule,
+    MatDividerModule
   ],
   exports: [
     RouterModule,
@@ -68,7 +80,11 @@ const routes: Routes = [
     MatButtonModule,
     MatExpansionModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCardModule,
+    MatSelectModule,
+    MatTooltipModule,
+    MatDividerModule
   ],
 })
 

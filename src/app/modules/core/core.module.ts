@@ -11,6 +11,8 @@ import { MatSidenavModule} from '@angular/material/sidenav';
 import { MatListModule} from '@angular/material/list';
 import { MatDividerModule} from '@angular/material/divider';
 import { AuthGuard } from '../auth/services/auth.guard';
+import {MatCardModule} from '@angular/material/card';
+import {MatChipsModule} from '@angular/material/chips';
 const routes: Routes = [
   {
     path: '',redirectTo:'home',pathMatch:"full",
@@ -44,7 +46,9 @@ const routes: Routes = [
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
+    MatCardModule,
+    MatChipsModule
   ],
   exports: [RouterModule, HeaderComponent, FooterComponent, LayoutComponent],
 })

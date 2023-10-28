@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule ,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -12,8 +12,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, CoreModule, AuthModule, RecipesModule, AppRouting,NgxSpinnerModule.forRoot({ type: 'square-jelly-box' }) , BrowserAnimationsModule,MatSidenavModule],
+  imports: [BrowserModule, CoreModule, AuthModule, RecipesModule, AppRouting, NgxSpinnerModule.forRoot({ type: 'square-jelly-box' }), BrowserAnimationsModule,MatSidenavModule],
   providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

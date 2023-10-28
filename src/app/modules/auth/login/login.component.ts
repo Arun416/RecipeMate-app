@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
 
   OnSubmitLogin(formData: any) {
     this.submitted = true;
-    this.spinner.show();
     if(this.loginFormroup.invalid){
       return;
     }
@@ -38,12 +37,11 @@ export class LoginComponent implements OnInit {
     this.authService.login(formData).subscribe({
       next: (resp:any)=>{
           console.log(resp);
-          setTimeout(() => {
-            /** spinner ends after 5 seconds */
-            this.spinner.hide();
-          }, 1000);
-  
-          this.router.navigate(['/home'])
+          this.router.navigate(['/home']);
+          alert("Okay")
+      },
+      error:err=>{
+        alert(err.message)
       }
     })
     setTimeout(()=>this.submitted=== false,1000)

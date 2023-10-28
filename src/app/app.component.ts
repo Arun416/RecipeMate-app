@@ -10,7 +10,7 @@ import { MatDrawer } from '@angular/material/sidenav';
 export class AppComponent implements OnInit{
   title = 'CodeSandbox';
   currentUserName:any;
-
+  spinnerType:any = "square-jelly-box"
   @ViewChild('drawer') drawer!: MatDrawer;
   constructor(private drawerService: DrawerService,){}
 

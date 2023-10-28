@@ -43,7 +43,7 @@ body {
 }
 
 /* [3] Finally, transforming the image when container gets hovered */
-.img-hover-zoom:hover img {
+.card:hover .img-hover-zoom img {
   transform: scale(1.2);
 }
 
@@ -69,13 +69,14 @@ body {
 
 .card {
   border-radius: 15px;
-  padding: 5px;
+  max-width: 300px;
 }
 
 .card:hover {
-  color: rgb(211, 2, 65);
   cursor: pointer;
 }
+
+
 
 .card-img-top {
   border-radius: 20px;
@@ -86,10 +87,16 @@ body {
   font-size: 18px;
 }
 
+.card-title:hover {
+  color: rgb(211, 2, 65);
+}
+
 .card-text {
   font-size: 15px;
   color: #dc582a;
   font-weight: 600;
+  vertical-align: middle;
+  padding-left: 5px;
 }
 
 @media (max-width: 768px) {
@@ -141,8 +148,7 @@ mat-list-item {
 
 .avatar {
   vertical-align: middle;
-  width: 30px;
-  height: 30px;
   border-radius: 50%;
   background-image: url('https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg');
+  background-size: cover;
 }

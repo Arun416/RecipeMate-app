@@ -23,7 +23,7 @@
   }
   
   /* [3] Finally, transforming the image when container gets hovered */
-  .img-hover-zoom:hover img {
+  .card:hover .img-hover-zoom img {
     transform: scale(1.2);
   }
   
@@ -49,11 +49,10 @@
   
   .card {
     border-radius: 15px;
-    padding: 5px;
+    max-width: 300px;
   }
   
   .card:hover {
-    color: rgb(211, 2, 65);
     cursor: pointer;
   }
   
@@ -65,11 +64,17 @@
     font-weight: 700;
     font-size: 18px;
   }
+
+  .card-title:hover{
+    color: rgb(211, 2, 65);
+  }
   
   .card-text {
     font-size: 15px;
     color: #dc582a;
     font-weight: 600;
+    vertical-align: middle;
+    padding-left: 5px;
   }
 
   

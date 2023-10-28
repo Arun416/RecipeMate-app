@@ -1,4 +1,4 @@
-<ngx-spinner bdColor = "rgba(0,180,0,0.8)" size = "large" color = "#fff" type="square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+<ngx-spinner bdColor = "rgba(0,180,0,0.8)" size = "medium" color = "#fff" [type]="spinnerType" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="sidenav"  mode="side">
         <div class="drawer--navMenu">
@@ -7,31 +7,42 @@
               <!--   <mat-list-item role="listitem"><button mat-icon-button (click)="drawer.toggle()" style="float: right;"> <span  class="material-icons">close</span></button>
                 </mat-list-item> -->
             </mat-list>
-       
 
             <div style="margin-bottom: 50px;padding-left: 10px;">
-                <span matListItemTitle style="font-size: 22px;font-weight: 00;font-family: Arial, Helvetica, sans-serif;vertical-align: middle;">Welcome back! {{getUsername()?.username}}   
+                <span matListItemTitle style="font-size: 18px;font-weight: 00;font-family: Arial, Helvetica, sans-serif;vertical-align: middle;">Welcome back! {{getUsername()?.username}}   
             </span>
             </div>
             <mat-divider></mat-divider>
             <mat-list-item class="nav-links" routerLink="/home" routerLinkActive="active">
               <a matListItemTitle>
-                All Recipe 
+                <span class="material-symbols-outlined color_blue sidemenu-icons fs-3">
+                  outdoor_grill
+                </span> 
+                <span style="font-size: 16px;vertical-align: middle;padding-left: 5px">All Recipes </span>
             </a>
             </mat-list-item>
             
             <mat-list-item class="nav-links" routerLink="/my-recipes" routerLinkActive="active">
               <a matListItemTitle>
-                 My Recipes </a>
+                <span class="material-symbols-outlined color_blue sidemenu-icons">
+                  favorite
+                </span> <span style="font-size: 16px;vertical-align: middle;padding-left: 5px"> My Recipes</span> </a>
             </mat-list-item>
             <mat-list-item class="nav-links" routerLink="/create" routerLinkActive="active">
                 <a matListItemTitle>
-                  Create New Recipe </a>
+                  <span class="material-symbols-outlined color_blue sidemenu-icons">
+                    add_circle
+                  </span> 
+                  <span style="font-size: 16px;vertical-align: middle;padding-left: 5px">Create New Recipe</span> </a>
               </mat-list-item>
             <mat-list-item class="nav-links">
-                <a matListItemTitle>Profile </a>
+              <a matListItemTitle>
+                  <span class="material-symbols-outlined sidemenu-icons">
+                  account_circle
+                  </span>
+                  <span style="font-size: 16px;vertical-align: middle;padding-left: 5px">Profile</span> </a>
             </mat-list-item>
-           
+           <mat-divider></mat-divider>
             <mat-list-item class="nav-links">
                 <a matListItemTitle>Settings </a>
             </mat-list-item>
@@ -42,5 +53,27 @@
 <main>
 <app-header></app-header>
 <router-outlet></router-outlet></main>
+<footer>
+  <mat-toolbar class="toolbarNav" *ngIf="isUserAuth()">
+    <button mat-flat-button routerLink="/home" routerLinkActive="active-link">
+      <span class="material-symbols-outlined color_blue">
+        outdoor_grill
+      </span>
+      <span>All Recipes</span>
+    </button>
+    <button mat-flat-button routerLink="/my-recipes" routerLinkActive="active-link">
+      <span class="material-symbols-outlined color_blue">
+        favorite
+      </span>
+      <span>My Recipes</span>
+    </button>
+    <button mat-flat-button routerLink="/create" routerLinkActive="active-link">
+      <span class="material-symbols-outlined color_blue">
+        add_circle
+      </span>
+      <span>Add Recipe</span>
+    </button>
+  </mat-toolbar>
+</footer>
 <!-- rgba(0, 0, 0, 0.8) -->
 </mat-drawer-container>

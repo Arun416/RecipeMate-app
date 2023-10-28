@@ -35,9 +35,50 @@
         <div class="mt-4 pt-4 mb-4">
             <span class="text-left fs-1 fw-7 pt-4 mt-4">All Recipes</span>
         </div>
-        <div class="mt-4 pt-4 d-flex flex-wrap bd-highlight justify-content-center align-items-center">
+        <div class="mb-4" >
+            <mat-chip-listbox aria-label="Fish selection" >
+                <mat-chip-option *ngFor="let cat of categoriesList"  (click)="searchcat(cat.name)">{{cat.name}}</mat-chip-option>
+              </mat-chip-listbox>
+        </div>
+        <div class="mt-4 pt-4 d-flex flex-wrap bd-highlight justify-content-center align-items-center" *ngIf="getRecipesCollection.length>0">
             <div class="recipe--lists bd-highlight"  *ngFor="let recipe of getRecipesCollection">
-                <div class="card" style="width: 17rem;" (click)="onSelectRecipe()">
+                <mat-card class="card" style="width: 17rem;" (click)="onSelectRecipe(recipe._id)">
+                    <mat-card-header>
+                      <div mat-card-avatar class="avatar"></div>
+                      <mat-card-title >{{recipe.username}}</mat-card-title>
+                      <mat-card-subtitle></mat-card-subtitle>
+                    </mat-card-header>
+                    <div class="img-hover-zoom">
+                    <img mat-card-image [src]="recipe.recipe_image" alt="" height="200px"></div>
+                    <mat-card-content>
+                        <div style="padding-top:1em;font-size: 13px;">
+                            <span class="material-symbols-outlined "  
+                            style="vertical-align:middle;font-size: 13px;">
+                            schedule
+                            </span><span style="padding-left: 3px;vertical-align: middle;">{{recipe.prep_time}}</span>
+                        </div>
+                       
+                        <h5 class="card-title fw-8 pt-2">{{recipe.recipe_name|titlecase}}</h5>
+                        {{recipe.description.length>10 ? recipe.description.slice(0,20)+'...' : recipe.description }}
+                        <!-- <p  style="vertical-align:middle;align-items:center;padding-top: 5px;"> 
+                          <span class="material-symbols-outlined example-tab-icon"  style="vertical-align:middle">
+                          schedule
+                          </span><span class="card-text">30mins</span></p> -->
+                      <p style="padding-top: 15px;">
+                        <span style="font-size: 12px;vertical-align: middle;">
+                            <span class="material-symbols-outlined" style="font-size: 12px;vertical-align: middle;">
+                            category
+                            </span><span style="vertical-align: middle;">category#: {{recipe.category}}</span></span>
+                      </p>
+                    </mat-card-content>
+                    <mat-card-actions align="end">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                      <button mat-icon-button ><span class="material-symbols-outlined">
+                        share
+                        </span></button>
+                    </mat-card-actions>
+                  </mat-card>
+                <!--   <div class="card" style="width: 17rem;" (click)="onSelectRecipe()">
                     <div class="card-header bg-transparent">  
                         <div class="card-header bg-transparent  d-inline-flex p-0">  
                         <div><img src="https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg" class="avatar" alt="Avatar" /></div>
@@ -49,11 +90,22 @@
                     </div>
                     <div class="card-body">
                     <h5 class="card-title fw-8">{{recipe.recipe_name}}</h5>
-                      <p class="card-text" style="vertical-align:middle;align-items:center">  <mat-icon class="example-tab-icon" style="vertical-align:middle;padding-bottom:10px">update</mat-icon>{{recipe.prepare_time}}</p>
-                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                      <p  style="vertical-align:middle;align-items:center"> 
+                        <span class="material-symbols-outlined example-tab-icon"  style="vertical-align:middle">
+                        schedule
+                        </span><span class="card-text">30mins</span></p>
                     </div>
-                  </div>
+                    <div class="card-footer">
+                        <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div> -->
             </div>
+        </div>
+        <div class="mt-4 pt-4 d-flex flex-row bd-highlight justify-content-center align-items-center" *ngIf="getRecipesCollection.length<=0">
+            <div>
+                <img src="assets/images/Oops.png" width="300" height="300"/>
+            </div>
+            <h2 class="mt-4 pt-4">Oops, Sorry Recipes Not Found </h2>
         </div>
     </div>
 </div>

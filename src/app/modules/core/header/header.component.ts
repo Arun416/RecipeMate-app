@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DrawerService } from '../services/drawer.service';
-import { AuthService } from '../../auth/services/auth.service';
+import { DrawerService } from '../../../services/drawerservice/drawer.service';
+import { AuthService } from '../../../services/authService/auth.service';
 import { Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 
@@ -12,6 +12,7 @@ import { Subject, Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit{
   isUserAuthenticated:boolean = false;
   authListenerSubs!:Subscription
+  isDrawerOpen$ = this.drawerService.getDrawerState();
   constructor(private drawerService: DrawerService,
     private authservice:AuthService,
     private router:Router) {
@@ -22,7 +23,7 @@ export class HeaderComponent implements OnInit{
     .subscribe(isAuthenticated=>{
         this.isUserAuthenticated = isAuthenticated
     })
-    console.log(this.isUserAuthenticated,"flag");
+   
     
   }
 
@@ -31,13 +32,19 @@ export class HeaderComponent implements OnInit{
   }
 
 
-  toggleDrawer() {
+  togglemenuBar() {
     this.drawerService.toggleDrawer();
   }
 
   logout() {
     this.authservice.logout();
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
+    this.isDrawerOpen$.subscribe((isOpen) => {
+     if(isOpen === true){
+      this.drawerService.toggleDrawer();
+     }
+    })
+   
   }
 
 }

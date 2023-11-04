@@ -40,7 +40,7 @@
                 <mat-chip-option *ngFor="let cat of categoriesList"  (click)="searchcat(cat.name)">{{cat.name}}</mat-chip-option>
               </mat-chip-listbox>
         </div>
-        <div class="mt-4 pt-4 d-flex flex-wrap bd-highlight justify-content-center align-items-center" *ngIf="getRecipesCollection.length>0">
+        <div class="mt-4 pt-4 d-flex flex-wrap bd-highlight justify-content-center align-items-center" *ngIf="getRecipesCollection?.length>0">
             <div class="recipe--lists bd-highlight"  *ngFor="let recipe of getRecipesCollection">
                 <mat-card class="card" style="width: 17rem;" (click)="onSelectRecipe(recipe._id)">
                     <mat-card-header>
@@ -101,7 +101,7 @@
                   </div> -->
             </div>
         </div>
-        <div class="mt-4 pt-4 d-flex flex-row bd-highlight justify-content-center align-items-center" *ngIf="getRecipesCollection.length<=0">
+        <div class="mt-4 pt-4 d-flex flex-row bd-highlight justify-content-center align-items-center" *ngIf="getRecipesCollection?.length<=0">
             <div>
                 <img src="assets/images/Oops.png" width="300" height="300"/>
             </div>

@@ -4,10 +4,7 @@
         <div class="drawer--navMenu">
         <mat-nav-list >
             <mat-list role="list">
-              <!--   <mat-list-item role="listitem"><button mat-icon-button (click)="drawer.toggle()" style="float: right;"> <span  class="material-icons">close</span></button>
-                </mat-list-item> -->
             </mat-list>
-
             <div style="margin-bottom: 50px;padding-left: 10px;">
                 <span matListItemTitle style="font-size: 18px;font-weight: 00;font-family: Arial, Helvetica, sans-serif;vertical-align: middle;">Welcome back! {{getUsername()?.username}}   
             </span>
@@ -44,15 +41,14 @@
             </mat-list-item>
            <mat-divider></mat-divider>
             <mat-list-item class="nav-links">
-                <a matListItemTitle>Settings </a>
+                <a matListItemTitle><span class="material-symbols-outlined sidemenu-icons">
+                  settings
+                  </span>Settings </a>
             </mat-list-item>
-           
     </mat-nav-list>
 </div>
 </mat-drawer>
-<main>
-<app-header></app-header>
-<router-outlet></router-outlet></main>
+<main><app-header></app-header><router-outlet></router-outlet></main>
 <footer>
   <mat-toolbar class="toolbarNav" *ngIf="isUserAuth()">
     <button mat-flat-button routerLink="/home" routerLinkActive="active-link">

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DrawerService } from './modules/core/services/drawer.service';
+import { DrawerService } from './services/drawerservice/drawer.service';
 import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
@@ -20,9 +20,9 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.isDrawerOpen$.subscribe((isOpen) => {
       if (isOpen) {
-        this.drawer.open();
+        this.drawer?.open();
       } else {
-        this.drawer.close();
+        this.drawer?.close();
       }
     });
   }

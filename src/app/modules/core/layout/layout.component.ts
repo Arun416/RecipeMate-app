@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CarouselConfig } from 'ngx-bootstrap/carousel';
-import { DrawerService } from '../services/drawer.service';
+import { DrawerService } from '../../../services/drawerservice/drawer.service';
 import { MatDrawer } from '@angular/material/sidenav';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { AuthService } from '../../auth/services/auth.service';
-import { RecipeService } from '../../recipes/services/recipe.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../../services/authService/auth.service';
+import { RecipeService } from '../../../services/recipe-service/recipe.service';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-layout',
@@ -23,7 +24,7 @@ export class LayoutComponent  implements OnInit{
   @ViewChild('drawer') drawer!: MatDrawer;
   getRecipesCollection:any;
   currentUserName:any;
-  isDrawerOpen$ = this.drawerService.getDrawerState();
+  isDrawerOpen$ = this.drawerService.getDrawerState()|| false;
 
  
   constructor(private drawerService: DrawerService,
@@ -32,7 +33,8 @@ export class LayoutComponent  implements OnInit{
     private recipeService:RecipeService,
     private router:Router,
     private spinner: NgxSpinnerService,
-    private route:ActivatedRoute) {
+    private route:ActivatedRoute,
+    private viewportScroller: ViewportScroller) {
   
   }
 
@@ -41,12 +43,17 @@ export class LayoutComponent  implements OnInit{
   ngOnInit() {
     this.isDrawerOpen$.subscribe((isOpen) => {
       if (isOpen) {
-        this.drawer.open();
+        this.drawer?.open();
       } else {
-        this.drawer.close();
+        this.drawer?.close();
       }
     });
-
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Scroll to the top of the page
+        this.viewportScroller.scrollToPosition([0, 0]);
+      }
+    });
     this.getUsersRecipes();
     this. getCategories();
   }
@@ -81,9 +88,9 @@ export class LayoutComponent  implements OnInit{
     this.recipeService.getRecipes().subscribe((res:any)=>{
       console.log(res)
       this.getRecipesCollection = res.data;
-      setTimeout(() => {
+     
         this.spinner.hide();
-      }, 100);
+
     })
   }
 

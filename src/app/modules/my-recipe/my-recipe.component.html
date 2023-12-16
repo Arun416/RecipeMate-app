@@ -1,0 +1,101 @@
+<div class="container">
+    <div class=" d-flex flex-column justify-content-center  p-5">
+   <!--    <div class="mt-2 pt-2 mb-2" style="display: flex;justify-content: right;">
+        <button mat-raised-button color="primary" routerLink="/create">Create New Recipe</button>
+    </div> -->
+      <div class="mb-4 text-center">
+            <span class="text-left fs-1 fw-7 pt-4 mt-4">My Recipes</span>
+        </div>
+        <div class="mt-4 pt-4 d-flex flex-wrap bd-highlight justify-content-center align-items-center"
+        *ngIf="savedRecipes?.length>0">
+            <div class="recipe--lists bd-highlight"  *ngFor="let myrecipe of savedRecipes">
+             <!--    <div class="card" style="width: 17rem;" >
+                    <div class="card-header bg-transparent  d-inline-flex">  
+                
+                     </div>
+                    <div class="img-hover-zoom">
+                    <img [src]="myrecipe.recipe_image" class="card-img-top" alt="..." width="300px" height="200px">
+                    </div>
+                    <div class="card-body">
+                    <h5 class="card-title fw-8">{{myrecipe.recipe_name}}</h5>
+                      <p class="card-text" style="vertical-align:middle;align-items:center">  <mat-icon class="example-tab-icon" style="vertical-align:middle;padding-bottom:10px">update</mat-icon>20</p>
+                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+ -->
+              <mat-card class="card" style="width: 17rem;" >
+                
+                <mat-card-header>
+                  <div class="menuicon">
+                    <button mat-icon-button (click)="preventClick($event)" [matMenuTriggerFor]="menu" aria-label="vertical three dot icon">
+                      <mat-icon>more_horiz</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item (click)="onEditRecipe(myrecipe._id)">
+                        <mat-icon>edit</mat-icon>
+                        <span>Edit recipe</span>
+                      </button>
+                      <mat-divider></mat-divider>
+                      <button mat-menu-item [routerLink]="['/view-recipe/',myrecipe._id]">
+                        <mat-icon>info</mat-icon>
+                        <span>View Recipe</span>
+                      </button>
+                      <mat-divider></mat-divider>
+                      <button mat-menu-item (click)="deleteRecipe(myrecipe._id)">
+                        <mat-icon>delete_outline</mat-icon>
+                        <span>Remove/Delete</span>
+                      </button>
+                    </mat-menu>
+                  </div>   
+                </mat-card-header>
+                <div class="img-hover-zoom">
+                <img mat-card-image [src]="myrecipe.recipe_image" alt="" height="200px"></div>
+                <mat-card-content>
+                  <div style="padding-top:1em;font-size: 13px;">
+                    <span class="material-symbols-outlined example-tab-icon"  
+                    style="vertical-align:middle;font-size: 13px;">
+                    schedule
+                    </span><span style="padding-left: 3px;vertical-align: middle;">{{myrecipe.prep_time}}</span>
+                  </div>
+               
+                    <h5 class="card-title fw-8 pt-2" (click)="onSelectRecipe(myrecipe._id)">{{myrecipe.recipe_name}}</h5>
+                    {{myrecipe.description.length>10 ? myrecipe.description.slice(0,20)+'...' : myrecipe.description }}
+                    <!-- <p  style="vertical-align:middle;align-items:center;padding-top: 5px;"> 
+                      <span class="material-symbols-outlined example-tab-icon"  style="vertical-align:middle">
+                      schedule
+                      </span><span class="card-text">30mins</span></p>
+                   -->
+                    <p style="padding-top: 15px;">
+                      <span style="font-size: 12px;vertical-align: middle;">
+                          <span class="material-symbols-outlined" style="font-size: 12px;vertical-align: middle;">
+                          category
+                          </span><span style="vertical-align: middle;">category#: {{myrecipe.category}}</span></span>
+                    </p>
+                 
+                </mat-card-content>
+                <mat-card-actions align="end">
+                  <small class="text-body-secondary">Last updated 3 mins ago</small>
+                  <button mat-icon-button ><span class="material-symbols-outlined">
+                    share
+                    </span></button>
+                </mat-card-actions>
+              </mat-card>
+
+
+                    <!--   <div><img src="assets/images/img_avatar.png" width="30px" height="30px" style="border-radius: 50% ;vertical-align: middle;" alt="Avatar" ></div>
+                    <div>{{myrecipe.username}}</div> -->
+            </div>
+        </div>
+        <div class="mt-2 pt-2 d-flex flex-column bd-highlight justify-content-center align-items-center"
+        *ngIf="savedRecipes?.length<=0">
+          <div>
+          
+            <img src="assets/images/Oops.png" width="300" height="300"/>
+            <h2 class="mt-4 pt-4">Oops, Sorry Recipes Not Found </h2>
+           
+        </div>
+        <button mat-raised-button color="primary" routerLink="/create">Create New Recipe</button>
+        </div>
+    </div>
+</div>
+

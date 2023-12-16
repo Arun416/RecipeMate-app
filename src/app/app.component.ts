@@ -1,18 +1,24 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DrawerService } from './services/drawerservice/drawer.service';
 import { MatDrawer } from '@angular/material/sidenav';
+
+import { Router } from '@angular/router';
+import { DrawerService } from './services/drawerservice/drawer.service';
+import { AuthService } from './services/authService/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'CodeSandbox';
   currentUserName:any;
   spinnerType:any = "square-jelly-box"
-  @ViewChild('drawer') drawer!: MatDrawer;
-  constructor(private drawerService: DrawerService,){}
+ 
+  @ViewChild('drawer') drawer?: MatDrawer;
+  constructor(private drawerService: DrawerService,
+    private authService:AuthService,
+    private router:Router){}
 
   isDrawerOpen$ = this.drawerService.getDrawerState();
 
@@ -24,7 +30,7 @@ export class AppComponent implements OnInit{
       } else {
         this.drawer?.close();
       }
-    });
+    });    
   }
 
   isUserAuth(){
@@ -32,9 +38,9 @@ export class AppComponent implements OnInit{
   }
 
   getUsername(){
-    if(this.isUserAuth()){
+   /*  if(this.isUserAuth()){
       this.currentUserName = JSON.parse(localStorage.getItem('currentUser')|| '')
       return this.currentUserName;
-    }
+    } */
   }
 }

@@ -1,44 +1,89 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, map } from 'rxjs';
+import { BehaviorSubject,map,switchMap,tap } from 'rxjs';
+import  {JwtPayload, jwtDecode}  from 'jwt-decode';
+
+export const USER_STORAGE_KEY = 'auth'
+
+export interface UserData {
+  token: string,
+  id: string,
+  username: string
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  isLoggedIn: boolean = false;
-  private token!: string;
-  private authStatusListener = new Subject<boolean>();
+  private user:BehaviorSubject<UserData | null | undefined> = new 
+  BehaviorSubject<UserData | null | undefined>(undefined) 
+  /* private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
+  isLoggedIn$ = this._isLoggedIn$.asObservable(); */
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {
+    /* const token = localStorage.getItem('auth');
+    this._isLoggedIn$.next(!!token); */
+    this.loadUser();
+   }
 
-  
-  isUserAuth(){
-      return localStorage.getItem('auth');
-  }
-
-  getAuthStatusListener() {
-    return this.authStatusListener.asObservable();
+  loadUser(){
+    const token = localStorage.getItem(USER_STORAGE_KEY);
+    if(token){
+      const decoded:any = jwtDecode<JwtPayload>(token);
+      console.log('🚀 token Loaded in auth service',decoded);
+      const userData:UserData = {
+        token: token,
+        id: decoded.userData.id,
+        username: decoded.userData.username
+      };
+      this.user.next(userData);
+    }
+    else {
+      this.user.next(null);
+    }
   }
 
   signup(userData:any){
-    return this.http.post('http://localhost:3000//api/auth/signup',userData)
+    return this.http.post('http://localhost:3000/api/auth/signup',userData).
+    pipe(switchMap((res:any)=>{
+      const userLoginData = {
+        email: userData.email,
+        password: userData.password,
+        rememberMe: false,
+      }
+      return this.login(userLoginData)
+    }))
   }
 
-  login(userData:any){
-    return this.http.post('http://localhost:3000/api/auth/login',userData).pipe(map((res:any)=>{
+  login(userFormData:any){
+    return this.http.post('http://localhost:3000/api/auth/login',userFormData).pipe(map((res:any)=>{
       const token = res.token;
-      this.token = token;
-      localStorage.setItem('auth',token)
-      localStorage.setItem('currentUser',JSON.stringify(res.data))
-      this.authStatusListener.next(true)
+      localStorage.setItem(USER_STORAGE_KEY,token)
+      const decode:any = jwtDecode<JwtPayload>(res.token)
+      console.log(decode,"decoded data")
+      const userInfo:UserData ={
+        token : res.token,
+        id: decode.userData.id,
+        username: decode.userData.username
+      }
+      this.user.next(userInfo);
+      return userInfo;
     }))
     
   }
 
   logout(){
-    localStorage.removeItem('auth');
-    this.authStatusListener.next(false)
+    localStorage.removeItem(USER_STORAGE_KEY);
+    this.user.next(null);
+    window.location.reload();
+  }
+
+  getCurrentUser() {
+    return this.user.asObservable();
+  }
+
+  getCurrentUserId(){
+    return this.user.getValue()?.id
   }
 
   

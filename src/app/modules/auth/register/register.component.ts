@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { AuthService } from '../../../services/authService/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -23,7 +25,10 @@ export class RegisterComponent implements OnInit {
   submitted:boolean=false;
   matcher = new MyErrorStateMatcher();
 
-  constructor(private fb: FormBuilder,private authService:AuthService){}
+  constructor(private fb: FormBuilder,
+              private authService:AuthService,
+              private toastr: ToastrService,
+              private router:Router){}
 
   ngOnInit(): void {
     this.signUpFormGroup = this.fb.group({
@@ -60,8 +65,15 @@ onSubmitSignup(formData: any){
     this.authService.signup(formData).subscribe({
       next: (resp:any)=>{
           console.log(resp);
-          window.alert("success");
-          
-      } })
+          this.router.navigateByUrl('/');
+          this.toastr.success(resp.message, 'Success',{
+            timeOut: 2000,
+          });  
+      },
+    error:err =>{
+      this.toastr.error(err, 'Error',{
+        timeOut: 2000,
+      }); 
+    } })
   }
 }

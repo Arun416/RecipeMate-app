@@ -13,15 +13,13 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent implements OnInit {
   loginFormroup!:FormGroup;
   submitted:boolean=false;
-  private formSubmitAttempt!: boolean;
   
   constructor(private fb:FormBuilder,
     private authService:AuthService,
     private spinner: NgxSpinnerService,
     private router: Router,
     private toastr: ToastrService
-    ){}
-
+  ){}
 
   ngOnInit(){
     this.loginFormroup = this.fb.group({
@@ -34,21 +32,23 @@ export class LoginComponent implements OnInit {
   OnSubmitLogin(formData: any) {
     this.submitted = true;
     if(this.loginFormroup.invalid){
+      this.submitted = false;
       return;
     }
     this.authService.login(formData).subscribe({
       next: (resp:any)=>{
-          console.log(resp);
-          this.router.navigate(['/home']);
-          this.toastr.success('Successfully Loginned!', 'Success',{
+          this.router.navigateByUrl('/');
+          setTimeout(()=>{window.location.reload()},300)
+          this.toastr.success(resp.message, 'Success',{
             timeOut: 2000,
           });
           this.submitted = false;
-      },
+        },
       error:err=>{
-        alert(err.message)
+          this.toastr.error(err, 'Success',{
+            timeOut: 2000,
+          });
       }
     })
-    
   }
 }

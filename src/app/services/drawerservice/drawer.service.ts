@@ -9,21 +9,21 @@ export class DrawerService {
 
   constructor() { }
 
-  private drawerState = new BehaviorSubject<boolean>(false);
+  public drawerState = new BehaviorSubject<boolean>(false);
 
-  openDrawer() {
+  public openDrawer() {
     this.drawerState.next(true);
   }
 
-  closeDrawer() {
+  public closeDrawer() {
     this.drawerState.next(false);
   }
 
-  toggleDrawer() {
+  public  toggleDrawer() {
     this.drawerState.next(!this.drawerState.value);
   }
 
-  getDrawerState(): Observable<boolean> {
+  public getDrawerState(): Observable<boolean> {
     return this.drawerState.asObservable();
   }
 }

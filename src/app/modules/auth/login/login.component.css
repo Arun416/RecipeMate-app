@@ -1,5 +1,5 @@
 .login--page--backgroud {
-    background-image: url('/src/assets/images/recipe_image.png');;
+    background-image: url('../../../../assets/images/recipe_image.png');;
     background-size: cover;
     background-repeat: no-repeat;
 }

@@ -13,7 +13,12 @@ export class HeaderComponent implements OnInit{
   authListenerSubs!:Subscription
   isDrawerOpen$ = this.drawerService.getDrawerState();
   IsUserAuthenticated =  this.authService.getCurrentUserId();
-
+  items: string[] = [
+    'The first choice!',
+    'And another choice for you.',
+    'but wait! A third!'
+  ];
+  
   constructor(private drawerService: DrawerService,
     public authService:AuthService,
     private router:Router) {
@@ -29,13 +34,17 @@ export class HeaderComponent implements OnInit{
 
   logout() {
     this.authService.logout();
-    this.router.navigateByUrl('/login');
+    this.router.navigate(['/login']);
     this.isDrawerOpen$.subscribe((isOpen) => {
      if(isOpen === true){
       this.drawerService.toggleDrawer();
      }
     })
-   
+  }
+
+  getUser(){
+    let currentUser:any = this.authService.getCurrentUser();
+    return currentUser.source._value.username;
   }
 
 }

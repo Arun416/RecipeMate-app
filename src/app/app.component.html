@@ -1,17 +1,25 @@
-<ngx-spinner bdColor = "rgba(0,180,0,0.8)" size = "medium" color = "#fff" [type]="spinnerType" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+<ngx-spinner bdColor = "rgba(0,180,0,0.8)" size = "medium" color = "#fff" [type]="spinnerType" [fullScreen] = "true"><h3 style="color: white" > RecipeMate </h3></ngx-spinner>
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="sidenav"  mode="side">
         <div class="drawer--navMenu">
         <mat-nav-list >
             <mat-list role="list">
-              
+              <div class="d-flex flex-column 
+               align-items-start gap-3 px-2 mx-2">
+                <div style="padding-left: 44px;">
+                  <img src="https://avatar.iran.liara.run/public/28" class="avatar"/>
+                </div>
+                <div style="margin-bottom: 40px;">
+                <span matListItemTitle 
+                style="font-size: 18px;font-weight: 00;font-family: Arial, Helvetica, sans-serif;
+                vertical-align: middle;">Welcome back! {{getUsername()}}
+              </span>
+              </div>
+              </div>
+             
             </mat-list>
-            <div style="margin-bottom: 50px;padding-left: 10px;">
-              <img src="https://avatar.iran.liara.run/public/28" class="avatar"/>
-
-                <span matListItemTitle style="font-size: 18px;font-weight: 00;font-family: Arial, Helvetica, sans-serif;vertical-align: middle;">Welcome back!
-            </span>
-            </div>
+           
+          
             <mat-divider></mat-divider>
             <mat-list-item class="nav-links" routerLink="/home" routerLinkActive="active">
               <a matListItemTitle>

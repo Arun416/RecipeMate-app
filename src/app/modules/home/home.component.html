@@ -35,16 +35,27 @@
                 <mat-chip-option *ngFor="let cat of categoriesList"  (click)="searchcat(cat.name)">{{cat.name}}</mat-chip-option>
               </mat-chip-listbox>
         </div>
-        <div>
-            <mat-form-field appearance="outline" style="width:400px !important;">
-                <mat-label>Search Recipes</mat-label>
-                <input type="text" matInput [(ngModel)]="searchName" placeholder="Search Recipe.. ex:Sambar,pulao"
-                (input)="searchRecipeByName(searchName)">
-                <mat-icon matSuffix>search</mat-icon>
-            </mat-form-field>
+        <div class="d-lg-flex flex-column flex-md-row flex-lg-row justify-content-center ">
+           
+                <div class="recipe-search-box">
+                    <mat-form-field appearance="outline" style="width:300px !important;">
+                        <mat-label>Search Recipes</mat-label>
+                        <input type="text" matInput [(ngModel)]="searchTerm" placeholder="Search Recipe.. ex:Sambar,pulao"
+                        (input)="searchRecipeByName(searchTerm)">
+                        <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="float-end" style="right: 10%; position: absolute;">
+                    <div>
+                        <select class="form-select" aria-label="Default select example" (change)="onSort($event)">
+                            <option *ngFor="let sort of sortList" [value]="sort.value" >{{sort.name}}</option>
+                          </select>
+                    </div>
+                </div>
         </div>
         <div class="mt-4 pt-4 d-flex flex-wrap bd-highlight justify-content-center align-items-center" *ngIf="getRecipesCollection?.length>0">
-            <div class="recipe--lists bd-highlight"  *ngFor="let recipe of getRecipesCollection">
+            <div class="recipe--lists bd-highlight"  *ngFor="let recipe of getRecipesCollection | paginate: {
+                id:'listing_pagination',itemsPerPage:isItemsPerPage, currentPage: pagination,totalItems:totalRecords}">
                 <mat-card class="card" style="width: 17rem;" (click)="onSelectRecipe(recipe._id)">
                     <mat-card-header>
                       <div mat-card-avatar class="avatar"></div>
@@ -75,14 +86,24 @@
                       </p>
                     </mat-card-content>
                     <mat-card-actions align="end">
-                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                      <small class="text-body-secondary">Last updated {{getTimeAgo()}} ago</small>
                       <button mat-icon-button ><span class="material-symbols-outlined">
                         share
                         </span></button>
                     </mat-card-actions>
                   </mat-card>
-
             </div>
+        </div>
+        <div *ngIf="getRecipesCollection?.length>0">
+            <div class="d-flex flex-row justify-content-around  pt-3 mt-3 gap-3">
+                <div>
+                    <p>Showing {{isItemsPerPage}} out of {{totalRecipes}} Recipes</p>
+                </div>   
+                <div>
+                    <pagination-controls id="listing_pagination" class="align-items-center"  previousLabel="Previous"
+                    nextLabel="Next" (pageChange)="onTablePageChange($event)"></pagination-controls>
+                </div>
+              </div>
         </div>
         <div class="mt-4 pt-4 d-flex flex-row bd-highlight justify-content-center align-items-center" *ngIf="getRecipesCollection?.length<=0">
             <div>

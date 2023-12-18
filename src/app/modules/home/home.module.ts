@@ -16,6 +16,8 @@ import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { NgxPaginationModule } from "ngx-pagination";
+import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 
 const routes:Routes = [
     {path:'', component:HomeComponent}
@@ -38,7 +40,10 @@ const routes:Routes = [
         MatIconModule,
         MatFormFieldModule,
         MatChipsModule,
-        NgxSpinnerModule.forRoot({ type: 'square-jelly-box' }), ],
+        NgxSpinnerModule.forRoot({ type: 'square-jelly-box' }), 
+        NgxPaginationModule,
+        BsDropdownModule.forRoot()
+    ],
     exports: [HomeComponent,RouterModule]
 })
 

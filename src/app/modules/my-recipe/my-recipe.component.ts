@@ -32,7 +32,7 @@ export class MyRecipeComponent implements OnInit{
     this.spinner.show();
     this.recipeService.getMyRecipes(decoded.userData.username).subscribe((res:any)=>{
       console.log(res);
-      this.savedRecipes = res.data;
+      this.savedRecipes = res.data.recipeList;
      
         this.spinner.hide();
       

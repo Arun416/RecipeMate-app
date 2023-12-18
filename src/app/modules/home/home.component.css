@@ -153,6 +153,21 @@ mat-list-item {
   background-size: cover;
 }
 
-:ng-deep .mdc-evolution-chip__action {
-  color: #509e2f;
+::ng-deep .mat-mdc-standard-chip.mat-primary.mat-mdc-chip-selected {
+  --mdc-chip-elevated-container-color: #509e2f;
 }
+
+::ng-deep .ngx-pagination .current { 
+  background: #509e2f !important;
+  color: #fefefe;
+  position: relative;
+}
+
+@media only screen and (max-width:450px) {
+  .recipe-search-box {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    align-self:center;
+  }
+} 

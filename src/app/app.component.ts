@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
         this.drawer?.close();
       }
     });    
+    
   }
 
   isUserAuth(){
@@ -38,9 +39,9 @@ export class AppComponent implements OnInit {
   }
 
   getUsername(){
-   /*  if(this.isUserAuth()){
-      this.currentUserName = JSON.parse(localStorage.getItem('currentUser')|| '')
-      return this.currentUserName;
-    } */
+     if(this.isUserAuth()){
+      this.currentUserName = this.authService.getCurrentUser();
+      return this.currentUserName.source._value.username;
+    } 
   }
 }

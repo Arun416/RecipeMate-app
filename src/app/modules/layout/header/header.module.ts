@@ -8,6 +8,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { RouterModule, Routes } from "@angular/router";
 import { CommonModule } from "@angular/common";
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 const routes:Routes = [
     {path:'', component:HeaderComponent}
@@ -22,7 +23,9 @@ const routes:Routes = [
         MatListModule,
         MatSidenavModule,
         MatToolbarModule,
-        MatButtonModule,RouterModule.forChild(routes)],
+        MatButtonModule,
+        RouterModule.forChild(routes),
+        BsDropdownModule.forRoot() ],
     exports: [HeaderComponent,RouterModule]
 })
 

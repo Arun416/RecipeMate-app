@@ -18,6 +18,20 @@ export class RecipeService {
     return this.http.get('http://localhost:3000/api/category/',{headers: header});
   }
 
+  getHomeCatgories(){
+    const header = new HttpHeaders({
+      "Content-Type": "application/json",
+    })
+    return this.http.get('http://localhost:3000/api/category/home',{headers: header});
+  }
+
+  getHomeCategory(catName:any){
+    const header = new HttpHeaders({
+      "Content-Type": "application/json",
+    })
+    return  this.http.get('http://localhost:3000/api/recipe/home',{ params: {cat:catName},headers: header})
+  }
+
   getSelectedCategory(catName:string){
     const header = new HttpHeaders({
       "Content-Type": "application/json",
@@ -26,22 +40,36 @@ export class RecipeService {
     return  this.http.get('http://localhost:3000/api/recipe/',{ params: {cat:catName},headers: header})
   }
 
-  getRecipes():Observable<Recipes>{
+  getRecipes(page:any,limit:any,column:any,sortType:any,searchTerm:any):Observable<any>{
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("page",page);
+    queryParams = queryParams.append("limit",limit);
+    queryParams = queryParams.append("sortField",column);
+    queryParams = queryParams.append("sortOrder",sortType);
+    queryParams = queryParams.append("search",searchTerm);
+    
     const header = new HttpHeaders({
       "Content-Type": "application/json",
       "Authorization": "Bearer "+this.token_ID
     })
    /*  let queryParams = new HttpParams();
     queryParams = queryParams.append("search",searchterm); */
-    return this.http.get<Recipes>('http://localhost:3000/api/recipe',{headers: header});
+    return this.http.get<Recipes>('http://localhost:3000/api/recipe',{params:queryParams,headers: header});
   }
 
-  getSuggestRecipes(){
+  getSuggestRecipes(page:any,limit:any,column:any,sortType:any,searchTerm:any){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("page",page);
+    queryParams = queryParams.append("limit",limit);
+    queryParams = queryParams.append("sortField",column);
+    queryParams = queryParams.append("sortOrder",sortType);
+    queryParams = queryParams.append("search",searchTerm);
+    
     const header = new HttpHeaders({
       "Content-Type": "application/json",
       "Authorization": "Bearer "+this.token_ID
     })
-    return this.http.get('http://localhost:3000/api/recipe/home',{headers: header});
+    return this.http.get('http://localhost:3000/api/recipe/home',{params:queryParams, headers: header});
   }
 
   getMyRecipes(currentUserRecipes:any) {

@@ -16,7 +16,7 @@ export class RecipeService {
       "Content-Type": "application/json",
       "Authorization": "Bearer "+this.token_ID
     })
-    return this.http.get(environment.baseURL+'/category/',{headers: header});
+    return this.http.get(environment.baseURL+'category/',{headers: header});
   }
 
   getHomeCatgories(){

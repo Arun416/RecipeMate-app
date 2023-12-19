@@ -44,7 +44,7 @@ export class AuthService {
   }
 
   signup(userData:any){
-    return this.http.post('https://recipemate-back.onrender.com/api/auth/signup',userData).
+    return this.http.post('http://localhost:3000/api/auth/signup',userData).
     pipe(switchMap((res:any)=>{
       const userLoginData = {
         email: userData.email,
@@ -56,7 +56,7 @@ export class AuthService {
   }
 
   login(userFormData:any){
-    return this.http.post('https://recipemate-back.onrender.com/api/auth/login',userFormData).pipe(map((res:any)=>{
+    return this.http.post('http://localhost:3000/api/auth/login',userFormData).pipe(map((res:any)=>{
       const token = res.token;
       localStorage.setItem(USER_STORAGE_KEY,token)
       const decode:any = jwtDecode<JwtPayload>(res.token)

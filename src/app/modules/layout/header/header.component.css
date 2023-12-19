@@ -68,6 +68,11 @@
   padding: 3px 8px;
 }
 
+#basic-link-dropdown {
+  right: 0;
+ float: inline-end;
+}
+
 .search {
   display: flex;
   align-items: center;

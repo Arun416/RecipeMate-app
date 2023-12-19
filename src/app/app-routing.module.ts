@@ -24,6 +24,7 @@ const routes: Routes = [
    { path: 'edit/:id', loadChildren: () => import('./modules/edit-recipe/edit-recipe.module').then(m => m.EditRecipeModule) },
    { path: 'my-recipe', loadChildren: () => import('./modules/my-recipe/my-recipe.module').then(m => m.MyRecipeModule) },
    { path: 'view-recipe/:id', loadChildren: () => import('./modules/view-recipe/view-recipe.module').then(m => m.ViewRecipeModule) },
+   { path: 'profile', loadChildren: () => import('./modules/auth/profile/profile.module').then(m => m.ProfileModule) },
 
 ];
 

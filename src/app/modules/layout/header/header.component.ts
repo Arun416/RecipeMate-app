@@ -47,4 +47,14 @@ export class HeaderComponent implements OnInit{
     return currentUser.source._value.username;
   }
 
+  onHidden(): void {
+    console.log('Dropdown is hidden');
+  }
+  onShown(): void {
+    console.log('Dropdown is shown');
+  }
+  isOpenChange(): void {
+    console.log('Dropdown state is changed');
+  }
+
 }

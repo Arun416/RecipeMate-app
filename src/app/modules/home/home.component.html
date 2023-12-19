@@ -35,9 +35,9 @@
                 <mat-chip-option *ngFor="let cat of categoriesList"  (click)="searchcat(cat.name)">{{cat.name}}</mat-chip-option>
               </mat-chip-listbox>
         </div>
-        <div class="d-lg-flex flex-column flex-md-row flex-lg-row justify-content-center ">
+        <div class="d-lg-flex flex-column flex-md-row flex-lg-row justify-content-center " *ngIf="getRecipesCollection?.length>0">
            
-                <div class="recipe-search-box">
+                <div class="recipe-search-box" >
                     <mat-form-field appearance="outline" style="width:300px !important;">
                         <mat-label>Search Recipes</mat-label>
                         <input type="text" matInput [(ngModel)]="searchTerm" placeholder="Search Recipe.. ex:Sambar,pulao"

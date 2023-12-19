@@ -64,11 +64,12 @@ onSubmitSignup(formData: any){
     console.log(formData);
     this.authService.signup(formData).subscribe({
       next: (resp:any)=>{
-          console.log(resp);
-          this.router.navigateByUrl('/');
-          this.toastr.success(resp.message, 'Success',{
-            timeOut: 2000,
-          });  
+        this.router.navigateByUrl('/home');
+        setTimeout(()=>{window.location.reload()},300)
+        this.toastr.success(resp.message, 'Success',{
+          timeOut: 2000,
+        });
+        this.submitted = false;
       },
     error:err =>{
       this.toastr.error(err, 'Error',{

@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit,OnDestroy {
   @ViewChild('drawer') drawer!: MatDrawer;
   getRecipesCollection:any;
   currentUserName:any;
-  isDrawerOpen$ = this.drawerService.getDrawerState()|| false;
+  isDrawerOpen$ = this.drawerService.getDrawerState();
   public pagination:number = 1;
   public totalRecords = 0 ;
   public pageSizes = [20,40,80];
@@ -57,13 +57,16 @@ export class HomeComponent implements OnInit,OnDestroy {
 
   // You can optionally subscribe to the drawer state and control it manually.
   ngOnInit() {
-    this.isDrawerOpen$.subscribe((isOpen) => {
-      if (isOpen) {
-        this.drawer?.open();
-      } else {
-        this.drawer?.close();
-      }
-    });
+    setTimeout(()=>{
+      this.isDrawerOpen$.subscribe((isOpen:any) => {
+        if (isOpen) {
+          this.drawer?.open();
+        } else {
+          this.drawer?.close();
+        }
+      });
+    },500)
+  
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // Scroll to the top of the page

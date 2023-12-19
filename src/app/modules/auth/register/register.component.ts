@@ -65,7 +65,6 @@ onSubmitSignup(formData: any){
     this.authService.signup(formData).subscribe({
       next: (resp:any)=>{
         this.router.navigateByUrl('/');
-        setTimeout(()=>{window.location.reload()},100)
         this.toastr.success(resp.message, 'Success',{
           timeOut: 2000,
         });

@@ -1,31 +1,33 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DrawerService } from '../../../services/drawerservice/drawer.service';
-import { AuthService } from '../../../services/authService/auth.service';
+import { AuthService, UserData } from '../../../services/authService/auth.service';
 import { Router } from '@angular/router';
-import { Subject, Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
+import { JwtPayload, jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit{
-  authListenerSubs!:Subscription
+export class HeaderComponent implements OnInit,OnDestroy{
   isDrawerOpen$ = this.drawerService.getDrawerState();
-  IsUserAuthenticated =  this.authService.getCurrentUserId();
-  items: string[] = [
-    'The first choice!',
-    'And another choice for you.',
-    'but wait! A third!'
-  ];
+  IsUserAuthenticated =  this._authService.getCurrentUserId();
+  isAuthenticated: boolean = false;
+  userData: UserData | null | undefined;
+  private unsubscribe$: Subject<void> = new Subject<void>();
   
   constructor(private drawerService: DrawerService,
-    public authService:AuthService,
+    public _authService:AuthService,
     private router:Router) {
   }
 
   ngOnInit():void {
-    console.log(this.IsUserAuthenticated);
+    this._authService.getCurrentUser().pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe((user) => {
+      
+    });
   }
 
   togglemenuBar() {
@@ -33,28 +35,24 @@ export class HeaderComponent implements OnInit{
   }
 
   logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+    this._authService.logout();
+  
     this.isDrawerOpen$.subscribe((isOpen) => {
-     if(isOpen === true){
+     if(isOpen==true){
       this.drawerService.toggleDrawer();
      }
     })
   }
 
   getUser(){
-    let currentUser:any = this.authService.getCurrentUser();
-    return currentUser.source._value.username;
+    const user:any = localStorage.getItem('auth');
+    const decoded:any = jwtDecode<JwtPayload>(user);
+    return decoded.userData.username;
   }
 
-  onHidden(): void {
-    console.log('Dropdown is hidden');
-  }
-  onShown(): void {
-    console.log('Dropdown is shown');
-  }
-  isOpenChange(): void {
-    console.log('Dropdown state is changed');
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }

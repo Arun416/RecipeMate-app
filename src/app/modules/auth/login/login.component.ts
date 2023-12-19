@@ -4,6 +4,7 @@ import { AuthService } from '../../../services/authService/auth.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -38,7 +39,6 @@ export class LoginComponent implements OnInit {
     this.authService.login(formData).subscribe({
       next: (resp:any)=>{
           this.router.navigateByUrl('/');
-          setTimeout(()=>{window.location.reload()},200)
           this.toastr.success(resp.message, 'Success',{
             timeOut: 2000,
           });

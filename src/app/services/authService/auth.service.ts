@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject,map,switchMap,tap } from 'rxjs';
 import  {JwtPayload, jwtDecode}  from 'jwt-decode';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 export const USER_STORAGE_KEY = 'auth'
 
@@ -16,12 +17,13 @@ export interface UserData {
   providedIn: 'root'
 })
 export class AuthService {
-  private user:BehaviorSubject<UserData | null | undefined> = new 
-  BehaviorSubject<UserData | null | undefined>(undefined) 
+  public user:BehaviorSubject<UserData | null | undefined> = new 
+  BehaviorSubject<UserData | null | undefined>(null) 
   /* private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this._isLoggedIn$.asObservable(); */
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,
+    private router:Router) {
     /* const token = localStorage.getItem('auth');
     this._isLoggedIn$.next(!!token); */
     this.loadUser();
@@ -37,6 +39,7 @@ export class AuthService {
         id: decoded.userData.id,
         username: decoded.userData.username
       };
+      console.log(decoded,"load")
       this.user.next(userData);
     }
     else {
@@ -75,17 +78,24 @@ export class AuthService {
 
   logout(){
     localStorage.removeItem(USER_STORAGE_KEY);
+    this.router.navigate(['/login']);
     this.user.next(null);
-    window.location.reload();
   }
 
-  getCurrentUser() {
+  public getCurrentUser() {
     return this.user.asObservable();
   }
 
-  getCurrentUserId(){
+  public getCurrentUserId(){
     return this.user.getValue()?.id
   }
 
+  loggedIn() {
+    return !!localStorage.getItem(USER_STORAGE_KEY)
+  }
+
+  getToken(){
+    return localStorage.getItem(USER_STORAGE_KEY)
+  }
   
 }

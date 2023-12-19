@@ -101,7 +101,7 @@ export class RecipeService {
       "Content-Type": "application/json",
       "Authorization": "Bearer "+this.token_ID
     })
-    return this.http.get(environment.baseURL+'recipe/${id}',{headers: header});
+    return this.http.get(environment.baseURL+'recipe/'+id,{headers: header});
   }
 
   deleteRecipes(recipeID:string){

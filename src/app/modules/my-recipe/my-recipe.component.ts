@@ -27,8 +27,7 @@ export class MyRecipeComponent implements OnInit{
   
   getMyRecipes(){
     const user:any = this.authService.getCurrentUser();
-    console.log(user,"Current user")
-    const decoded:any = jwtDecode<JwtPayload>(user.source._value.token);
+    const decoded:any = jwtDecode<JwtPayload>(user?.source?._value.token);
     this.spinner.show();
     this.recipeService.getMyRecipes(decoded.userData.username).subscribe((res:any)=>{
       console.log(res);

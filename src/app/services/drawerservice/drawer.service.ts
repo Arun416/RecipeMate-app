@@ -7,9 +7,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class DrawerService {
 
-  constructor() { }
+  constructor() {
+    console.log(this.drawerState)
+   }
 
-  public drawerState = new BehaviorSubject<boolean>(false);
+  public drawerState = new BehaviorSubject<any>('');
 
   public openDrawer() {
     this.drawerState.next(true);
@@ -19,7 +21,7 @@ export class DrawerService {
     this.drawerState.next(false);
   }
 
-  public  toggleDrawer() {
+  public toggleDrawer() {
     this.drawerState.next(!this.drawerState.value);
   }
 

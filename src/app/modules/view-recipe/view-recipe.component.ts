@@ -25,27 +25,24 @@ export class ViewRecipeComponent implements OnInit{
               private router:Router,
               private viewportScroller: ViewportScroller,
               private drawerService:DrawerService){
-      
+              /*   this.isDrawerOpen$.subscribe((isOpen:any) => {
+                  if(isOpen == true){
+                   this.drawerService.toggleDrawer();
+                  }
+                })   */
   }
 
  
   ngOnInit():void{
     this.spinner.show();
-    /*  this.isDrawerOpen$.subscribe((isOpen) => {
-      if(isOpen == true){
-       this.drawerService.toggleDrawer();
-      }
-    })  */
+  
     const Id = this.route.snapshot.paramMap.get('id');
-    setTimeout(()=>{
+    
       this.recipeService.viewRecipe(Id).subscribe((res:any)=>{
-        console.log(res);
         this.recipeInfo = res.data
         this.dataSource = this.recipeInfo.ingredients;
         this.spinner.hide();
-      
       })
-    },200)
    
 
     this.router.events.subscribe((event) => {

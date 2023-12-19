@@ -126,6 +126,13 @@ li + li {
     padding-top: 4px;
   }
 
+  .recipe-title {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-decoration:solid;
+  }
+
 
   @media only screen and (max-width: 500px)  {
     .rectangle--box {

@@ -55,17 +55,18 @@
 <div class="container view--recipe--page ">
     <div class="d-sm-flex flex-sm-column flex-xs-column flex-lg-row justify-content-around align-items-center mt-4 pt-4  gap-4">
           <div class="mt-2 pt-2">
-              <img class="recipe--image" [src]="recipeInfo.recipe_image"/>
+              <img class="recipe--image" [src]="recipeInfo?.recipe_image"/>
           </div>
           <div>
               <div class="rectangle--box">
+                <h1 class="recipe-title">{{recipeInfo.recipe_name}}</h1>
                 <mat-tab-group fitInkBarToContent>
                   <mat-tab label="INGREDIENTS">
                     <div class="ingredients--text mb-2">
                       <p>{{recipeInfo.description}}</p>
                     </div>
                     <div class="">
-                      <p ><span>
+                      <p ><span style="font-weight: 600;">
                         Cooking Time:
                       </span>
                         <span class="material-symbols-outlined example-tab-icon text-danger"  

@@ -45,8 +45,11 @@
                         <mat-icon matSuffix>search</mat-icon>
                     </mat-form-field>
                 </div>
-                <div class="float-end" style="right: 10%; position: absolute;">
-                    <div>
+                <div class="d-inline-flex float-end " style="right: 10%; position: absolute;">
+                    <div style="vertical-align: middle;align-items: center;margin-right: 5px;padding-top: 5px;">
+                        <h3>Sort by:</h3>
+                    </div>
+                    <div style="vertical-align: middle;">
                         <select class="form-select" aria-label="Default select example" (change)="onSort($event)">
                             <option *ngFor="let sort of sortList" [value]="sort.value" >{{sort.name}}</option>
                           </select>

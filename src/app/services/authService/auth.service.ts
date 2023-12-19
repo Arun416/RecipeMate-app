@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject,map,switchMap,tap } from 'rxjs';
 import  {JwtPayload, jwtDecode}  from 'jwt-decode';
+import { environment } from 'src/environments/environment';
 
 export const USER_STORAGE_KEY = 'auth'
 
@@ -44,7 +45,7 @@ export class AuthService {
   }
 
   signup(userData:any){
-    return this.http.post('http://localhost:3000/api/auth/signup',userData).
+    return this.http.post(environment.baseURL+'auth/signup',userData).
     pipe(switchMap((res:any)=>{
       const userLoginData = {
         email: userData.email,
@@ -56,7 +57,7 @@ export class AuthService {
   }
 
   login(userFormData:any){
-    return this.http.post('http://localhost:3000/api/auth/login',userFormData).pipe(map((res:any)=>{
+    return this.http.post(environment.baseURL+'auth/login',userFormData).pipe(map((res:any)=>{
       const token = res.token;
       localStorage.setItem(USER_STORAGE_KEY,token)
       const decode:any = jwtDecode<JwtPayload>(res.token)

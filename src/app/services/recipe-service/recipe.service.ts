@@ -15,21 +15,21 @@ export class RecipeService {
       "Content-Type": "application/json",
       "Authorization": "Bearer "+this.token_ID
     })
-    return this.http.get('https://recipemate-back.onrender.com/api/category/',{headers: header});
+    return this.http.get('http://localhost:3000/api/category/',{headers: header});
   }
 
   getHomeCatgories(){
     const header = new HttpHeaders({
       "Content-Type": "application/json",
     })
-    return this.http.get('https://recipemate-back.onrender.com/api/category/home',{headers: header});
+    return this.http.get('http://localhost:3000/api/category/home',{headers: header});
   }
 
   getHomeCategory(catName:any){
     const header = new HttpHeaders({
       "Content-Type": "application/json",
     })
-    return  this.http.get('https://recipemate-back.onrender.com/api/recipe/home',{ params: {cat:catName},headers: header})
+    return  this.http.get('http://localhost:3000/api/recipe/home',{ params: {cat:catName},headers: header})
   }
 
   getSelectedCategory(catName:string){
@@ -37,7 +37,7 @@ export class RecipeService {
       "Content-Type": "application/json",
       "Authorization": "Bearer "+this.token_ID
     })
-    return  this.http.get('https://recipemate-back.onrender.com/api/recipe/',{ params: {cat:catName},headers: header})
+    return  this.http.get('http://localhost:3000/api/recipe/',{ params: {cat:catName},headers: header})
   }
 
   getRecipes(page:any,limit:any,column:any,sortType:any,searchTerm:any):Observable<any>{
@@ -54,7 +54,7 @@ export class RecipeService {
     })
    /*  let queryParams = new HttpParams();
     queryParams = queryParams.append("search",searchterm); */
-    return this.http.get<Recipes>('https://recipemate-back.onrender.com/api/recipe',{params:queryParams,headers: header});
+    return this.http.get<Recipes>('http://localhost:3000/api/recipe',{params:queryParams,headers: header});
   }
 
   getSuggestRecipes(page:any,limit:any,column:any,sortType:any,searchTerm:any){
@@ -69,7 +69,7 @@ export class RecipeService {
       "Content-Type": "application/json",
       "Authorization": "Bearer "+this.token_ID
     })
-    return this.http.get('https://recipemate-back.onrender.com/api/recipe/home',{params:queryParams, headers: header});
+    return this.http.get('http://localhost:3000/api/recipe/home',{params:queryParams, headers: header});
   }
 
   getMyRecipes(currentUserRecipes:any) {
@@ -77,7 +77,7 @@ export class RecipeService {
       "Content-Type": "application/json",
       "Authorization": "Bearer "+this.token_ID
     })
-    return this.http.get('https://recipemate-back.onrender.com/api/recipe/',{ params: {user:currentUserRecipes},headers:header,})
+    return this.http.get('http://localhost:3000/api/recipe/',{ params: {user:currentUserRecipes},headers:header,})
   }
 
 
@@ -85,14 +85,14 @@ export class RecipeService {
     const header = new HttpHeaders({
       "Authorization": "Bearer "+this.token_ID,
     })
-    return this.http.post('https://recipemate-back.onrender.com/api/recipe/new',formData,{headers: header})
+    return this.http.post('http://localhost:3000/api/recipe/new',formData,{headers: header})
   }
 
   editRecipes(formData:any,recipeId:any){
     const header = new HttpHeaders({
       "Authorization": "Bearer "+this.token_ID
     })
-    return this.http.patch('https://recipemate-back.onrender.com/api/recipe/edit/'+recipeId,formData,{ headers: header});
+    return this.http.patch('http://localhost:3000/api/recipe/edit/'+recipeId,formData,{ headers: header});
   }
 
   viewRecipe(id:any){
@@ -100,7 +100,7 @@ export class RecipeService {
       "Content-Type": "application/json",
       "Authorization": "Bearer "+this.token_ID
     })
-    return this.http.get(`https://recipemate-back.onrender.com/api/recipe/${id}`,{headers: header});
+    return this.http.get(`http://localhost:3000/api/recipe/${id}`,{headers: header});
   }
 
   deleteRecipes(recipeID:string){
@@ -108,6 +108,6 @@ export class RecipeService {
       "Content-Type": "application/json",
       "Authorization": "Bearer "+this.token_ID
     })
-    return this.http.delete('https://recipemate-back.onrender.com/api/recipe/delete/'+recipeID,{headers: header});
+    return this.http.delete('http://localhost:3000/api/recipe/delete/'+recipeID,{headers: header});
   }
 }

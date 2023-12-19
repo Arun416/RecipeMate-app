@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
     }
     this.authService.login(formData).subscribe({
       next: (resp:any)=>{
-          this.router.navigateByUrl('/home');
-          setTimeout(()=>{window.location.reload()},100)
+          this.router.navigateByUrl('/');
+          setTimeout(()=>{window.location.reload()},200)
           this.toastr.success(resp.message, 'Success',{
             timeOut: 2000,
           });

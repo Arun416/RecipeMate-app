@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject,map,switchMap,tap } from 'rxjs';
 import  {JwtPayload, jwtDecode}  from 'jwt-decode';
-import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { environment } from 'src/environment/environment';
 
 export const USER_STORAGE_KEY = 'auth'
 

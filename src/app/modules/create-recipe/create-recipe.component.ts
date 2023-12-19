@@ -164,7 +164,7 @@ export class CreateRecipeComponent  implements OnInit{
         this.toastr.success('Recipe Created Successfully!', 'Success',{
           timeOut: 2000,
         });
-        this.router.navigate(['/my-recipes'])
+        this.router.navigate(['/my-recipe'])
       })
   }
 }

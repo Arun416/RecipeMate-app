@@ -175,10 +175,8 @@ export class HomeComponent implements OnInit,OnDestroy {
   }
 
   onSelectRecipe(recpId:string){
-    console.log(this.route.snapshot.paramMap.get('id'));
-    console.log(recpId);
     
-    if(this.isUserAuth()){
+    if(this.isUserAuth){
     this.router.navigateByUrl('view-recipe/'+recpId);
     }
     else{

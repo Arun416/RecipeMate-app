@@ -39,7 +39,7 @@
                         </div>
                         <div class="w-100 mb-2">
                         
-                        <button mat-raised-button class="login--button" >
+                        <button mat-raised-button class="login--button" [disabled]="submitted">
                         <mat-icon *ngIf="submitted">
                         <mat-spinner color="primary" diameter="20">
                         </mat-spinner>

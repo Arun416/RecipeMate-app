@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule} from '@angular/material/menu';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MatMenuModule} from '@angular/material/menu';
     CommonModule,
     MyRecipeRoutingModule,
     MatButtonModule,MatCardModule,MatIconModule,
-    MatDividerModule,MatMenuModule
+    MatDividerModule,MatMenuModule,
+    SharedModule
   ]
 })
 export class MyRecipeModule { }

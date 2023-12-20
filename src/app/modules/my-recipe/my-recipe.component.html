@@ -6,8 +6,16 @@
       <div class="mb-4 text-center">
             <span class="text-left fs-1 fw-7 pt-4 mt-4">My Recipes</span>
         </div>
+        <div class="float-end justify-content-end d-flex">
+          <button mat-raised-button color="primary" routerLink="/create">Create New Recipe
+            <span class="material-icons">
+              add
+              </span>
+          </button>
+        </div>
         <div class="mt-4 pt-4 d-flex flex-wrap bd-highlight justify-content-center align-items-center"
         *ngIf="savedRecipes?.length>0">
+       
             <div class="recipe--lists bd-highlight"  *ngFor="let myrecipe of savedRecipes">
              <!--    <div class="card" style="width: 17rem;" >
                     <div class="card-header bg-transparent  d-inline-flex">  
@@ -23,7 +31,7 @@
                     </div>
                   </div>
  -->
-              <mat-card class="card" style="width: 17rem;" >
+              <mat-card class="card" >
                 
                 <mat-card-header>
                   <div class="menuicon">
@@ -49,7 +57,7 @@
                   </div>   
                 </mat-card-header>
                 <div class="img-hover-zoom">
-                <img mat-card-image [src]="myrecipe.recipe_image" alt="" height="200px"></div>
+                <img mat-card-image [src]="myrecipe.recipe_image" alt=""  width="280px" height="200px"></div>
                 <mat-card-content>
                   <div style="padding-top:1em;font-size: 13px;">
                     <span class="material-symbols-outlined example-tab-icon"  
@@ -74,7 +82,7 @@
                  
                 </mat-card-content>
                 <mat-card-actions align="end">
-                  <small class="text-body-secondary">Last updated 3 mins ago</small>
+                  <small class="text-body-secondary">Last updated {{myrecipe.updatedAt |timeAgo}}</small>
                   <button mat-icon-button ><span class="material-symbols-outlined">
                     share
                     </span></button>
@@ -94,7 +102,11 @@
             <h2 class="mt-4 pt-4">Oops, Sorry Recipes Not Found </h2>
            
         </div>
-        <button mat-raised-button color="primary" routerLink="/create">Create New Recipe</button>
+        <button mat-raised-button color="primary" routerLink="/create">Create New Recipe
+          <span class="material-icons">
+            add
+            </span>
+        </button>
         </div>
     </div>
 </div>

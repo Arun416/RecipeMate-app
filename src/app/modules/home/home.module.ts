@@ -18,6 +18,8 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { NgxPaginationModule } from "ngx-pagination";
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
+import { TimeAgoPipe } from "../../shared/time.pipe";
+import { SharedModule } from "src/app/shared/shared.module";
 
 const routes:Routes = [
     {path:'', component:HomeComponent}
@@ -42,7 +44,9 @@ const routes:Routes = [
         MatChipsModule,
         NgxSpinnerModule.forRoot({ type: 'square-jelly-box' }), 
         NgxPaginationModule,
-        BsDropdownModule.forRoot()
+        BsDropdownModule.forRoot(),
+        SharedModule
+        
     ],
     exports: [HomeComponent,RouterModule]
 })

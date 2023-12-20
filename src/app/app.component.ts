@@ -26,12 +26,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.isDrawerOpen$.subscribe((isOpen:any) => {      
-      if (isOpen==true) {
-        this.drawer?.open();
-       
-      } else {
-        this.drawer?.close();
-      }
+  
+      this.drawer?.toggle();
     }); 
     const user:any = localStorage.getItem('auth');    
     const decoded:any = jwtDecode<JwtPayload>(user);

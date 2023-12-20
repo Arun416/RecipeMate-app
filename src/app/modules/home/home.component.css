@@ -70,6 +70,7 @@ body {
 .card {
   border-radius: 15px;
   max-width: 300px;
+  width: 100%;
 }
 
 .card:hover {
@@ -149,7 +150,7 @@ mat-list-item {
 .avatar {
   vertical-align: middle;
   border-radius: 50%;
-  background-image: url('https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg');
+  background-image: url('https://avatar.iran.liara.run/public/28');
   background-size: cover;
 }
 

@@ -23,6 +23,9 @@ export class HeaderComponent implements OnInit,OnDestroy{
   }
 
   ngOnInit():void {
+    this.isDrawerOpen$.subscribe((isOpen) => {
+      console.log(isOpen)
+    })
     this._authService.getCurrentUser().pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe((user) => {
@@ -31,7 +34,7 @@ export class HeaderComponent implements OnInit,OnDestroy{
   }
 
   togglemenuBar() {
-    this.drawerService.toggleDrawer();
+    return this.drawerService.toggleDrawer();
   }
 
   logout() {

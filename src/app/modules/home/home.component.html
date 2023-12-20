@@ -59,14 +59,14 @@
         <div class="mt-4 pt-4 d-flex flex-wrap bd-highlight justify-content-center align-items-center" *ngIf="getRecipesCollection?.length>0">
             <div class="recipe--lists bd-highlight"  *ngFor="let recipe of getRecipesCollection | paginate: {
                 id:'listing_pagination',itemsPerPage:isItemsPerPage, currentPage: pagination,totalItems:totalRecords}">
-                <mat-card class="card" style="width: 17rem;" (click)="onSelectRecipe(recipe._id)">
+                <mat-card class="card" (click)="onSelectRecipe(recipe._id)">
                     <mat-card-header>
                       <div mat-card-avatar class="avatar"></div>
                       <mat-card-title >{{recipe.username}}</mat-card-title>
                       <mat-card-subtitle></mat-card-subtitle>
                     </mat-card-header>
                     <div class="img-hover-zoom">
-                    <img mat-card-image [src]="recipe.recipe_image" alt="" height="200px"></div>
+                    <img mat-card-image [src]="recipe.recipe_image" alt="" width="280px" height="200px"></div>
                     <mat-card-content>
                         <div style="padding-top:1em;font-size: 13px;">
                             <span class="material-symbols-outlined "  
@@ -89,7 +89,7 @@
                       </p>
                     </mat-card-content>
                     <mat-card-actions align="end">
-                      <small class="text-body-secondary">Last updated {{getTimeAgo()}} ago</small>
+                      <small class="text-body-secondary">Last updated {{recipe.updatedAt| timeAgo}}</small>
                       <button mat-icon-button ><span class="material-symbols-outlined">
                         share
                         </span></button>

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -6,23 +6,36 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DrawerService {
-
-  constructor() {
-    console.log(this.drawerState)
+  public drawerState = new BehaviorSubject<boolean>(false);
+  private isToggling = false;
+  constructor(private ngZone: NgZone) {
    }
 
-  public drawerState = new BehaviorSubject<any>('');
-
+ 
   public openDrawer() {
+    this.ngZone.run(() => {
     this.drawerState.next(true);
+    })
   }
 
   public closeDrawer() {
+    this.ngZone.run(() => {
     this.drawerState.next(false);
+    })
   }
 
   public toggleDrawer() {
-    this.drawerState.next(!this.drawerState.value);
+    if (!this.isToggling) {
+      this.isToggling = true;
+    console.log('Before Toggle:', this.drawerState.value);
+    this.ngZone.run(() => {
+      this.drawerState.next(!this.drawerState.value);
+      setTimeout(() => {
+        this.isToggling = false;
+      }, 0);
+    });
+    console.log('after Toggle:', this.drawerState.value);
+  }
   }
 
   public getDrawerState(): Observable<boolean> {

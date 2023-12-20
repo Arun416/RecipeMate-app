@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit,OnDestroy {
   totalRecipes:any;
   categoriesList:any;
   toggleCategory:boolean = false;
+  dataAgo:any[]=[];
   sortList = [
     {name:'A->Z(asc)',value:"asc"},
     {name:'Z->A(desc)',value:"desc"}
@@ -78,6 +79,7 @@ export class HomeComponent implements OnInit,OnDestroy {
     });
     this.getUsersRecipes();
     this. getCategories();
+    this.getTimeAgo()
   }
 
   isUserAuth(){
@@ -148,7 +150,7 @@ export class HomeComponent implements OnInit,OnDestroy {
       console.log(res)
       this.getRecipesCollection = res.data.recipeList;
       this.totalRecipes = res.data.total;
-        this.spinner.hide();
+      this.spinner.hide();
     })
   }
   else if(!this.isUserAuth()){
@@ -163,13 +165,8 @@ export class HomeComponent implements OnInit,OnDestroy {
   }
   }
 
-  getTimeAgo(){
-
-    this.getRecipesCollection.forEach((x:any)=>{
-      let updtedTime = moment.utc(x.updatedAt).local().startOf('seconds').fromNow()
-      return updtedTime
-    })
-    return
+  getTimeAgo(){   
+    /* this.dataAgo  = moment(this.getRecipesCollection.data.recipeList.updatedAt).fromNow(); */    
   }
 
   onSelectRecipe(recpId:string){

@@ -13,7 +13,6 @@ import { JwtPayload, jwtDecode } from 'jwt-decode';
 })
 export class AppComponent implements OnInit {
   title = 'CodeSandbox';
-  currentUserName:any;
   spinnerType:any = "square-jelly-box"
   isDrawerOpen$ = this.drawerService.getDrawerState();
   currentUser:any;
@@ -26,16 +25,17 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.isDrawerOpen$.subscribe((isOpen:any) => {      
-  
       this.drawer?.toggle();
-    }); 
-    const user:any = localStorage.getItem('auth');    
-    const decoded:any = jwtDecode<JwtPayload>(user);
+    });
+    const user:any = this.authService.getCurrentUser();    
+    const decoded:any = jwtDecode<JwtPayload>(user.source._value.token);
+    console.log(decoded,"In app compoennt");
+    
     this.currentUser =  decoded.userData.username;
   }
 
   isUserAuth(){
-    return localStorage.getItem('auth')
+    return localStorage.getItem('auth');
   }
 
   /*  getUsername(){

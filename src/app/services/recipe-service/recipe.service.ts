@@ -3,18 +3,26 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Recipes } from 'src/app/helpers/models/recipes';
 import { environment } from 'src/environment/environment';
+import { AuthService } from '../authService/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
   token_ID:any = localStorage.getItem('auth');
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private authServ:AuthService) { }
+
+
+  getAuthToken(){
+    let user:any  = this.authServ.getCurrentUser();
+    let jwt = user.source._value.token
+    return jwt;
+  }
 
   getCatgories(){
     const header = new HttpHeaders({
       "Content-Type": "application/json",
-      "Authorization": "Bearer "+this.token_ID
+      "Authorization": "Bearer "+this.getAuthToken()
     })
     return this.http.get(environment.baseURL+'category/',{headers: header});
   }
@@ -41,7 +49,7 @@ export class RecipeService {
     return  this.http.get(environment.baseURL+'recipe/',{ params: {cat:catName},headers: header})
   }
 
-  getRecipes(page:any,limit:any,column:any,sortType:any,searchTerm:any):Observable<any>{
+  getRecipes(page:any,limit:any,column:any,sortType:any,searchTerm:any,token:string):Observable<any>{
     let queryParams = new HttpParams();
     queryParams = queryParams.append("page",page);
     queryParams = queryParams.append("limit",limit);
@@ -51,7 +59,7 @@ export class RecipeService {
     
     const header = new HttpHeaders({
       "Content-Type": "application/json",
-      "Authorization": "Bearer "+this.token_ID
+      "Authorization": "Bearer "+token
     })
    /*  let queryParams = new HttpParams();
     queryParams = queryParams.append("search",searchterm); */
@@ -68,7 +76,6 @@ export class RecipeService {
     
     const header = new HttpHeaders({
       "Content-Type": "application/json",
-      "Authorization": "Bearer "+this.token_ID
     })
     return this.http.get(environment.baseURL+'recipe/home',{params:queryParams, headers: header});
   }

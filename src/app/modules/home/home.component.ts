@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit,OnDestroy {
   categoriesList:any;
   toggleCategory:boolean = false;
   dataAgo:any[]=[];
+  isUserAuth:any;
   sortList = [
     {name:'A->Z(asc)',value:"asc"},
     {name:'Z->A(desc)',value:"desc"}
@@ -58,6 +59,7 @@ export class HomeComponent implements OnInit,OnDestroy {
 
   // You can optionally subscribe to the drawer state and control it manually.
   ngOnInit() {
+     this.isUserAuth =  localStorage.getItem('auth')
     setTimeout(()=>{
       this.isDrawerOpen$.subscribe((isOpen:any) => {
         if (isOpen) {
@@ -78,45 +80,50 @@ export class HomeComponent implements OnInit,OnDestroy {
       this.onSearch(searchValue);
     });
     this.getUsersRecipes();
-    this. getCategories();
-    this.getTimeAgo()
+    this.getCategories();
   }
 
-  isUserAuth(){
+/*   isUserAuth(){
     return localStorage.getItem('auth')
-  }
+  } */
 
   getUsername(){
-    if(this.isUserAuth()){
+    if(this.isUserAuth){
       this.currentUserName = JSON.parse(localStorage.getItem('currentUser')|| '')
       return this.currentUserName;
     }
   }
 
+  getAuthToken(){
+    let user:any  = this.authService.getCurrentUser();
+    let jwt = user.source._value.token
+    return jwt;
+  }
+
  
   getCategories(){
-    if(this.isUserAuth()){
-    this.recipeService.getCatgories().subscribe((res:any)=>{
-      this.categoriesList = res.data
-    })
-    }
-    else if(!this.isUserAuth()){
-    this.recipeService.getHomeCatgories().subscribe((res:any)=>{
-      this.categoriesList = res.data
-    })
-    }
+      if(this.isUserAuth){
+        this.recipeService.getCatgories().subscribe((res:any)=>{
+          this.categoriesList = res.data
+        })
+        }
+        else if(!this.isUserAuth){
+        this.recipeService.getHomeCatgories().subscribe((res:any)=>{
+          this.categoriesList = res.data
+        })
+        }
   }
 
  
   searchcat(cat:any){
     this.toggleCategory = !this.toggleCategory
-    if(this.isUserAuth()){
+    if(this.isUserAuth){
     cat = this.toggleCategory==true?cat:"";
     this.recipeService.getSelectedCategory(cat).subscribe((res:any)=>{
        this.getRecipesCollection  = res.data.recipeList;
     })
     }
-    else if(!this.isUserAuth()){
+    else if(!this.isUserAuth){
       cat = this.toggleCategory==true?cat:"";
       this.recipeService.getHomeCategory(cat).subscribe((res:any)=>{
         this.getRecipesCollection  = res.data.recipeList;
@@ -141,32 +148,30 @@ export class HomeComponent implements OnInit,OnDestroy {
 
   getUsersRecipes(){
     this.spinner.show();
-    if(this.isUserAuth()){
-    this.recipeService.getRecipes(this.pagination,
-      this.isItemsPerPage,
-      'recipe_name',
-      this.sortOrder,
-      this.searchTerm).subscribe((res:any)=>{
-      console.log(res)
-      this.getRecipesCollection = res.data.recipeList;
-      this.totalRecipes = res.data.total;
-      this.spinner.hide();
-    })
-  }
-  else if(!this.isUserAuth()){
-    this.recipeService.getSuggestRecipes(this.pagination,
-      this.isItemsPerPage,
-      'recipe_name',
-      this.sortOrder,
-      this.searchTerm).subscribe((res:any)=>{
-      this.getRecipesCollection = res.data.recipeList;
-      this.spinner.hide();
-    })
-  }
-  }
-
-  getTimeAgo(){   
-    /* this.dataAgo  = moment(this.getRecipesCollection.data.recipeList.updatedAt).fromNow(); */    
+      if(this.isUserAuth){
+        this.recipeService.getRecipes(this.pagination,
+          this.isItemsPerPage,
+          'recipe_name',
+          this.sortOrder,
+          this.searchTerm,
+          this.getAuthToken()
+          ).subscribe((res:any)=>{
+          console.log(res)
+          this.getRecipesCollection = res.data.recipeList;
+          this.totalRecipes = res.data.total;
+          this.spinner.hide();
+        })
+      }
+      else if(!this.isUserAuth){
+        this.recipeService.getSuggestRecipes(this.pagination,
+          this.isItemsPerPage,
+          'recipe_name',
+          this.sortOrder,
+          this.searchTerm).subscribe((res:any)=>{
+          this.getRecipesCollection = res.data.recipeList;
+          this.spinner.hide();
+        })
+      }
   }
 
   onSelectRecipe(recpId:string){

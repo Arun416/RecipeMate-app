@@ -24,7 +24,6 @@ export class HeaderComponent implements OnInit,OnDestroy{
 
   ngOnInit():void {
     this.isDrawerOpen$.subscribe((isOpen) => {
-      console.log(isOpen)
     })
     this._authService.getCurrentUser().pipe(
       takeUntil(this.unsubscribe$)

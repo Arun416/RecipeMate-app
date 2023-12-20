@@ -27,14 +27,12 @@ export class DrawerService {
   public toggleDrawer() {
     if (!this.isToggling) {
       this.isToggling = true;
-    console.log('Before Toggle:', this.drawerState.value);
     this.ngZone.run(() => {
       this.drawerState.next(!this.drawerState.value);
       setTimeout(() => {
         this.isToggling = false;
       }, 0);
     });
-    console.log('after Toggle:', this.drawerState.value);
   }
   }
 

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject,map,switchMap,tap } from 'rxjs';
+import { BehaviorSubject,Observable,map,switchMap,tap } from 'rxjs';
 import  {JwtPayload, jwtDecode}  from 'jwt-decode';
 import { Router } from '@angular/router';
 import { environment } from 'src/environment/environment';
@@ -29,6 +29,7 @@ export class AuthService {
     this.loadUser();
    }
 
+   
   loadUser(){
     const token = localStorage.getItem(USER_STORAGE_KEY);
     if(token){
@@ -39,11 +40,10 @@ export class AuthService {
         id: decoded.userData.id,
         username: decoded.userData.username
       };
-      console.log(decoded,"load")
-      this.user.next(userData);
+      return this.user.next(userData);
     }
     else {
-      this.user.next(null);
+     return this.user.next(null);
     }
   }
 
@@ -59,12 +59,11 @@ export class AuthService {
     }))
   }
 
-  login(userFormData:any){
+  public login(userFormData:any): Observable<UserData>{
     return this.http.post(environment.baseURL+'auth/login',userFormData).pipe(map((res:any)=>{
       const token = res.token;
       localStorage.setItem(USER_STORAGE_KEY,token)
       const decode:any = jwtDecode<JwtPayload>(res.token)
-      console.log(decode,"decoded data")
       const userInfo:UserData ={
         token : res.token,
         id: decode.userData.id,
@@ -72,7 +71,9 @@ export class AuthService {
       }
       this.user.next(userInfo);
       return userInfo;
-    }))
+    }),
+    tap(() => this.loadUser())
+    )
     
   }
 
@@ -82,10 +83,12 @@ export class AuthService {
     this.user.next(null);
   }
 
+
   public getCurrentUser() {
+    this.loadUser();
     return this.user.asObservable();
   }
-
+ 
   public getCurrentUserId(){
     return this.user.getValue()?.id
   }

@@ -26,16 +26,18 @@ export class MyRecipeComponent implements OnInit{
   
   
   getMyRecipes(){
-    const user:any = this.authService.getCurrentUser();
-    const decoded:any = jwtDecode<JwtPayload>(user?.source?._value.token);
     this.spinner.show();
-    this.recipeService.getMyRecipes(decoded.userData.username).subscribe((res:any)=>{
-      console.log(res);
-      this.savedRecipes = res.data.recipeList;
-     
-        this.spinner.hide();
+      const user:any = this.authService.getCurrentUser();
+      console.log(user,"data recipes");
       
-    })
+      const decoded:any = jwtDecode<JwtPayload>(user?.source?._value.token);
+      this.recipeService.getMyRecipes(decoded.userData.username).subscribe((res:any)=>{
+        console.log(res);
+        this.savedRecipes = res.data.recipeList;
+       
+          this.spinner.hide();
+
+      })
   }
   
   deleteRecipe(recipeId:string){

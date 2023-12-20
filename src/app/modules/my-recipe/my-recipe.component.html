@@ -6,7 +6,7 @@
       <div class="mb-4 text-center">
             <span class="text-left fs-1 fw-7 pt-4 mt-4">My Recipes</span>
         </div>
-        <div class="float-end justify-content-end d-flex">
+        <div class="float-end justify-content-end d-flex"  *ngIf="savedRecipes?.length>0">
           <button mat-raised-button color="primary" routerLink="/create">Create New Recipe
             <span class="material-icons">
               add
@@ -102,7 +102,7 @@
             <h2 class="mt-4 pt-4">Oops, Sorry Recipes Not Found </h2>
            
         </div>
-        <button mat-raised-button color="primary" routerLink="/create">Create New Recipe
+        <button mat-raised-button color="primary"  routerLink="/create">Create New Recipe
           <span class="material-icons">
             add
             </span>

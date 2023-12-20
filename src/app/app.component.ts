@@ -32,18 +32,20 @@ export class AppComponent implements OnInit {
     console.log(decoded,"In app compoennt");
     
     this.currentUser =  decoded.userData.username; */
-    this.getUsername()
   }
 
   isUserAuth(){
     return localStorage.getItem('auth');
   }
 
-    getUsername(){
-
+    /* getUsername(){
         const user:any = localStorage.getItem('auth');
         const decoded:any = jwtDecode<JwtPayload>(user);
         console.log(decoded);
         decoded.username;
     } 
+ */
+    receiveCurrentUser(e:any){
+      this.currentUser = e.userData.username
+    }
 }

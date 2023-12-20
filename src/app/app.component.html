@@ -59,7 +59,7 @@
     </mat-nav-list>
 </div>
 </mat-drawer>
-<main><app-header></app-header>
+<main><app-header (sendUsername)="receiveCurrentUser($event)"></app-header>
   <router-outlet></router-outlet></main>
 <footer>
   <mat-toolbar class="toolbarNav" *ngIf="isUserAuth()">

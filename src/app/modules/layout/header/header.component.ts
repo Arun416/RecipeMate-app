@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { DrawerService } from '../../../services/drawerservice/drawer.service';
 import { AuthService, UserData } from '../../../services/authService/auth.service';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit,OnDestroy{
   isAuthenticated: boolean = false;
   userData: UserData | null | undefined;
   private unsubscribe$: Subject<void> = new Subject<void>();
-  
+  @Output() sendUsername  = new EventEmitter();
   constructor(private drawerService: DrawerService,
     public _authService:AuthService,
     private router:Router) {
@@ -49,6 +49,7 @@ export class HeaderComponent implements OnInit,OnDestroy{
   getUser(){
     const user:any = localStorage.getItem('auth');
     const decoded:any = jwtDecode<JwtPayload>(user);
+    this.sendUsername.emit(decoded);
     return decoded.userData.username;
   }
 

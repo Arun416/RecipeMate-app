@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    baseURL: 'http://localhost:3000/api/',
+    baseURL: 'https://recipemate-back.onrender.com/api/',
 }

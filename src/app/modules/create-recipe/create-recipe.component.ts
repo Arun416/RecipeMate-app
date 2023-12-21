@@ -20,7 +20,8 @@ export class CreateRecipeComponent  implements OnInit{
   categoriesList:any;
   selectedImage: string = ''; 
   recipeImageFile!:File;
-  
+  loading:boolean = false;
+
   constructor(
     private fb:FormBuilder,
     private recipeService:RecipeService,
@@ -144,7 +145,7 @@ export class CreateRecipeComponent  implements OnInit{
   }
 
   onSubmit(form:any){
-   
+    this.loading = true
     const formData:any = new FormData();
     formData.append('username', this.getUsername());
     formData.append('profilePic','');
@@ -164,6 +165,7 @@ export class CreateRecipeComponent  implements OnInit{
         this.toastr.success('Recipe Created Successfully!', 'Success',{
           timeOut: 2000,
         });
+        this.loading = false
         this.router.navigate(['/my-recipe'])
       })
   }

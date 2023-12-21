@@ -25,6 +25,7 @@ export class EditRecipeComponent implements OnInit {
   imgFlag:boolean = false;
   plaeholderImage:any;
   isDrawerOpen$ = this.drawerService.getDrawerState();
+  loading:boolean = false;
 
   constructor(
     private fb:FormBuilder,
@@ -212,7 +213,7 @@ existingPreperationSteps(){
 
   onSubmit(form:any){
    console.log(form,"Snd Form");
-
+    this.loading = true;
     const formData = new FormData();
     formData.append('username', this.getUsername());
     formData.append('profilePic',this.recipeData.profilePic);
@@ -224,14 +225,12 @@ existingPreperationSteps(){
     formData.append('preparation_steps',  JSON.stringify(this.EditRecipeFormGroup.value.preparation_steps))
     formData.append('servings', this.EditRecipeFormGroup.value.servings);
     formData.append('recipe_image',this.EditRecipeFormGroup.value.recipe_image);
-    console.log(form);
     
-
     this.recipeService.editRecipes(formData,this.recipe_ID).subscribe((res:any)=>{
-        console.log(res);
         this.toastr.success('Recipe Updated Successfully!', 'Success',{
           timeOut: 2000,
         });
+        this.loading = false;
         this.router.navigateByUrl('/my-recipe')
    }) 
 }

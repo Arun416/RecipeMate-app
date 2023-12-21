@@ -36,7 +36,7 @@
             <div class="row mb-3">
                 <div class="col-12 mt-2">
                     <button mat-flat-button color="primary" style="background: #509e2f;" (click)="onSubmit(EditRecipeFormGroup.value)">
-                        <mat-icon>check</mat-icon>UPDATE RECIPE</button>
+                        <mat-icon [hidden]="loading">check</mat-icon> <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>UPDATE RECIPE</button>
                 </div>
                 <div class="col-12 mt-3 pt-3">
                     <mat-form-field appearance="outline" class="create-recipe-fieldGroup">

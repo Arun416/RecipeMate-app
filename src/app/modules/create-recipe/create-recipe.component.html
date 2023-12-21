@@ -31,8 +31,8 @@
             />
             <div class="row mb-3">
                 <div class="col-12 mt-2">
-                    <button mat-flat-button color="primary" style="background: #509e2f;" (click)="onSubmit(createRecipe.value)">
-                        <mat-icon>check</mat-icon>CREATE RECIPE</button>
+                    <button mat-flat-button color="primary" [disabled]="createRecipe.invalid" style="background: #509e2f;" (click)="onSubmit(createRecipe.value)">
+                        <mat-icon [hidden]="loading">check</mat-icon> <i *ngIf="loading" class="fa fa-spinner fa-spin"></i> CREATE RECIPE</button>
                 </div>
                 <div class="col-12 mt-3 pt-3">
                     <mat-form-field appearance="outline" class="create-recipe-fieldGroup">

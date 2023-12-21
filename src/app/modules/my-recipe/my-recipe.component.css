@@ -55,7 +55,7 @@
   
   .card {
     border-radius: 15px;
-    max-width: 350px;
+    max-width: 300px;
     width: 100%;
   }
   
@@ -91,3 +91,4 @@
     left: 85%;
     position: relative;
   }
+

@@ -13,6 +13,10 @@ import { RecipeService } from 'src/app/services/recipe-service/recipe.service';
 })
 export class MyRecipeComponent implements OnInit{
   savedRecipes:any;
+  sortOrder: 'asc' | 'desc' = 'asc';
+  searchTerm:string = "";
+  public isItemsPerPage = 20;
+  public pagination:number = 1;
   constructor(private recipeService:RecipeService, 
     private spinner: NgxSpinnerService,
     private router:Router,
@@ -20,21 +24,28 @@ export class MyRecipeComponent implements OnInit{
     private authService:AuthService){}
   
   ngOnInit():void{
-    this.getMyRecipes()
+    this.getAllRecipes();
+    this.getMyRecipes();
   }
-  
+
+  getAllRecipes(){
+    const user:any = this.authService.getCurrentUser();
+    this.recipeService.getRecipes(
+      this.pagination,
+      this.isItemsPerPage,
+      'recipe_name',
+      this.sortOrder,
+      this.searchTerm,user?.source?._value.token).subscribe(res=>{
+    })
+  }
   
   
   getMyRecipes(){
     this.spinner.show();
-      const user:any = this.authService.getCurrentUser();
-      console.log(user,"data recipes");
-      
+      const user:any = this.authService.getCurrentUser();      
       const decoded:any = jwtDecode<JwtPayload>(user?.source?._value.token);
       this.recipeService.getMyRecipes(decoded.userData.username).subscribe((res:any)=>{
-        console.log(res);
         this.savedRecipes = res.data.recipeList;
-       
           this.spinner.hide();
 
       })
@@ -42,13 +53,12 @@ export class MyRecipeComponent implements OnInit{
   
   deleteRecipe(recipeId:string){
     this.recipeService.deleteRecipes(recipeId).subscribe(res=>{
-      console.log(res);
       this.getMyRecipes();
       this.toastr.success('Recipe deleted Successfully!', 'Success',{
         timeOut: 2000,
       });
   
-      
+      this.getAllRecipes();
     })
   }
   
@@ -59,7 +69,6 @@ export class MyRecipeComponent implements OnInit{
   onEditRecipe(recipeId:string){
     this.router.navigateByUrl('/edit/'+recipeId);
   }
-  
   
   preventClick(event: MouseEvent){
     event.preventDefault();

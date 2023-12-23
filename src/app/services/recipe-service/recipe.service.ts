@@ -80,10 +80,10 @@ export class RecipeService {
     return this.http.get(environment.baseURL+'recipe/home',{params:queryParams, headers: header});
   }
 
-  getMyRecipes(currentUserRecipes:any) {
+  getMyRecipes(currentUserRecipes:any,) {
     const header = new HttpHeaders({
       "Content-Type": "application/json",
-      "Authorization": "Bearer "+this.token_ID
+      "Authorization": "Bearer "+this.getAuthToken()
     })
     return this.http.get(environment.baseURL+'recipe/',{ params: {user:currentUserRecipes},headers:header,})
   }

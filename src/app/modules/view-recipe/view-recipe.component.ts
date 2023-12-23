@@ -13,7 +13,7 @@ import { RecipeService } from 'src/app/services/recipe-service/recipe.service';
   styleUrls: ['./view-recipe.component.css']
 })
 export class ViewRecipeComponent implements OnInit{
-  displayedColumns: string[] = ['id', 'Name', 'Quantity'];
+  displayedColumns: string[] = ['Name', 'Quantity'];
   dataSource: any;
   recipeInfo:any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;

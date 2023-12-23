@@ -17,7 +17,8 @@ import { MatPaginatorModule} from '@angular/material/paginator';
     CommonModule,
     ViewRecipeRoutingModule,
     MatTabsModule,MatCardModule,MatExpansionModule,
-    MatTableModule,MatPaginatorModule
+    MatTableModule,MatPaginatorModule,
+   
   ]
 })
 export class ViewRecipeModule { }

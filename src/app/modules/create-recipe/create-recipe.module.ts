@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MatSelectModule} from '@angular/material/select';
     TabsModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,MatButtonModule,MatCardModule,MatInputModule,
-    MatFormFieldModule,MatSelectModule,MatIconModule
+    MatFormFieldModule,MatSelectModule,MatIconModule,
+    MatAutocompleteModule
   ],
 })
 export class CreateRecipeModule { }

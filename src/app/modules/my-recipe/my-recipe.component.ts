@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtPayload, jwtDecode } from 'jwt-decode';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/authService/auth.service';
@@ -17,11 +18,15 @@ export class MyRecipeComponent implements OnInit{
   searchTerm:string = "";
   public isItemsPerPage = 20;
   public pagination:number = 1;
+  modalRef?: BsModalRef;
+  message?: string;
+  
   constructor(private recipeService:RecipeService, 
     private spinner: NgxSpinnerService,
     private router:Router,
     private toastr: ToastrService,
-    private authService:AuthService){}
+    private authService:AuthService,
+    private modalService: BsModalService){}
   
   ngOnInit():void{
     this.getAllRecipes();
@@ -50,6 +55,30 @@ export class MyRecipeComponent implements OnInit{
 
       })
   }
+
+
+  selectedRecipeId:string='';
+  openModal(template: TemplateRef<void>,id:any) {
+    this.selectedRecipeId = id
+    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+  }
+ 
+  confirm(): void {
+    this.recipeService.deleteRecipes(this.selectedRecipeId).subscribe(res=>{
+      this.getMyRecipes();
+      this.toastr.success('Recipe deleted Successfully!', 'Success',{
+        timeOut: 2000,
+      });
+  
+      this.getAllRecipes();
+    })
+    this.modalRef?.hide();
+  }
+ 
+  decline(): void {
+    this.message = 'Declined!';
+    this.modalRef?.hide();
+  }
   
   deleteRecipe(recipeId:string){
     this.recipeService.deleteRecipes(recipeId).subscribe(res=>{
@@ -61,6 +90,7 @@ export class MyRecipeComponent implements OnInit{
       this.getAllRecipes();
     })
   }
+
   
   onSelectRecipe(recipeId:any){
     this.router.navigateByUrl('/view-recipes/'+recipeId);

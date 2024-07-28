@@ -106,7 +106,7 @@ export class RecipeService {
   viewRecipe(id:any){
     const header = new HttpHeaders({
       "Content-Type": "application/json",
-      "Authorization": "Bearer "+this.token_ID
+      "Authorization": "Bearer "+this.getAuthToken()
     })
     return this.http.get(environment.baseURL+'recipe/'+id,{headers: header});
   }

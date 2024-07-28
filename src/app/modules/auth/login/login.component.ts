@@ -40,14 +40,15 @@ export class LoginComponent implements OnInit {
       next: (resp:any)=>{
           this.router.navigateByUrl('/');
           this.toastr.success(resp.message, 'Success',{
-            timeOut: 2000,
+            timeOut: 3000,
           });
           this.submitted = false;
         },
       error:err=>{
           this.toastr.error(err, 'Success',{
-            timeOut: 2000,
+            timeOut: 3000,
           });
+          this.submitted = false;
       }
     })
   }

@@ -90,8 +90,8 @@ export class HomeComponent implements OnInit,OnDestroy {
   getUsername(){
     if(this.isUserAuth){
       this.currentUserName = JSON.parse(localStorage.getItem('currentUser')|| '')
-      return this.currentUserName;
     }
+    return this.currentUserName;
   }
 
   getAuthToken(){

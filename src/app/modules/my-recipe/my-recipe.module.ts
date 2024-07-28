@@ -9,6 +9,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule} from '@angular/material/menu';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MyRecipeRoutingModule,
     MatButtonModule,MatCardModule,MatIconModule,
     MatDividerModule,MatMenuModule,
-    SharedModule
+    SharedModule,
+    ModalModule.forRoot()
   ]
 })
 export class MyRecipeModule { }
